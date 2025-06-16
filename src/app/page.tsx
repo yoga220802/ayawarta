@@ -1,103 +1,69 @@
+import React from "react";
 import Image from "next/image";
+import { MoveRight } from "lucide-react";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+export default function LandingPage() {
+	return (
+		<div className='relative min-h-screen bg-white text-slate-800 overflow-hidden font-sans'>
+			<Image
+				src='/images/landing/bg-page.svg'
+				alt='Latar belakang halaman dengan bentuk dekoratif'
+				fill
+				className='object-cover opacity-75'
+			/>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+			<div className='container mx-auto px-6 md:px-12 relative z-10'>
+				<header className='py-8'>
+					<h1 className='font-lilita text-4xl font-normal tracking-wider'>
+							<span className='text-[#403D99]'>Aya</span>
+							<span className='text-[#6B66FF]'>Warta</span>.
+					</h1>
+				</header>
+
+				<main className='flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[calc(100vh-150px)] pb-16'>
+					<div className='text-center lg:text-left max-w-xl'>
+						<h2 className='text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight'>
+								<span className='text-[#403D99]'>Ini Hari Anda</span>
+								<br />
+								<span className='text-[#403D99]'>
+									Rayakan Setiap <span className='text-[#6B66FF]'>Detiknya</span>
+								</span>
+						</h2>
+						<p className='mt-6 text-lg text-slate-600'>
+							Bagikan kabar bahagia pernikahan Anda melalui undangan digital yang
+							didesain untuk menyentuh hati dan memukau setiap tamu.
+						</p>
+						<a
+							href='#order'
+							className='mt-10 inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105'>
+							COMING SOON
+							<MoveRight size={20} />
+						</a>
+					</div>
+
+					<div className='relative flex-1 flex items-center justify-center lg:justify-end w-full lg:w-auto'>
+						<div className='relative w-full max-w-md lg:max-w-xl'>
+							<Image
+								src='/images/landing/bg-handphone.svg' // Ganti dengan path aset bg-handphone Anda
+								alt='Latar belakang abstrak untuk telepon'
+								width={700}
+								height={700}
+								className='w-full h-auto'
+							/>
+							<div className='absolute inset-0 flex items-center justify-center'>
+								<Image
+									src='/images/landing/handphone.svg'
+									alt='Mockup aplikasi di telepon'
+									width={300}
+									height={600}
+									priority
+									className='w-auto h-auto max-h-[90%] transform transition-transform duration-500 hover:scale-105'
+								/>
+							</div>
+						</div>
+					</div>
+				</main>
+			</div>
+		</div>
+	);
 }
