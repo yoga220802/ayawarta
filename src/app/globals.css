@@ -1,18 +1,19 @@
+/* --- REFACTOR (Tailwind v4) ---
+  1. Di Tailwind v4, kita hanya perlu satu @import.
+     '@import "tailwindcss";' akan secara otomatis menyertakan
+     preflight (base styles), komponen, dan utilities.
+  2. Menghapus `font-family` dari body. Biarkan Next.js Font di `layout.tsx` yang mengatur font
+     agar optimasi font berjalan dengan benar dan tidak terjadi konflik.
+*/
 @import "tailwindcss";
-@import "tailwindcss/preflight";
-/* 2. Style kustom global */
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+
+/* Style kustom bisa ditambahkan di bawah sini. */
 
 /* Efek garis bawah untuk link navigasi di header */
 .nav-link-hover {
   position: relative;
   transition: color 0.3s ease;
   padding-bottom: 6px;
-  /* Beri sedikit ruang untuk garis bawah */
 }
 
 .nav-link-hover::after {
