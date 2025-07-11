@@ -1,19 +1,26 @@
 "use client";
 
-import Header from "./components/header"
+import Header from "./components/landing/header";
+import HeroSection from "./components/landing/homeSection";
+
 
 export default function HomePage() {
 	return (
-		<main className="font-sans">
-			<Header logoUrl='/images/logo.png' />
+		<main className='font-sans'>
+			<Header />
 
-			<section id="hero" className="h-screen bg-gray-100 flex items-center justify-center">
-				<div className="text-center">
-					<h1 className="text-4xl font-bold mb-4">Selamat Datang di AyaWarta</h1>
-					<p className="text-lg text-gray-700 mb-6">Buat undangan digital modern yang elegan dan interaktif.</p>
-					<a href="#fitur" className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition-colors">Mulai Sekarang</a>
+			<HeroSection />
+
+			<section
+				id='fitur'
+				className='h-screen bg-white flex items-center justify-center'>
+				<div className='text-center'>
+					<h2 className='text-3xl font-bold text-gray-800'>Fitur-Fitur Keren</h2>
+					<p className='text-lg text-gray-500 mt-4'>
+						Akan kita bangun selanjutnya...
+					</p>
 				</div>
 			</section>
 		</main>
-	)
+	);
 }
