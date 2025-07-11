@@ -3,6 +3,7 @@
 import FeaturesSection from "./components/landing/featureSection";
 import Header from "./components/landing/header";
 import HeroSection from "./components/landing/homeSection";
+import PricingSection from "./components/landing/pricingSection";
 
 
 export default function HomePage() {
@@ -13,6 +14,8 @@ export default function HomePage() {
 			<HeroSection />
 
 			<FeaturesSection />
+
+			<PricingSection />
 
 			<section
 				id='fitur'
