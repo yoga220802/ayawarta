@@ -14,7 +14,7 @@ const ASSETS = {
 	sliderImages: [
 		"/images/slider/slide1.png",
 		"/images/slider/slide2.png",
-		"/images/slider/slide3.jpg",
+		"/images/slider/slide3.png",
 	],
 	userAvatars: [
 		"https://i.pravatar.cc/40?img=1",
@@ -147,7 +147,7 @@ const HeroSection: React.FC = () => {
 
 			{/* Phone Mockup - Right Side */}
 			<motion.div
-				className='absolute top-0 right-0 h-full w-[280px] sm:w-[350px] md:w-[400px] lg:w-[450px] flex items-center pointer-events-none'
+				className='absolute top-0 right-0 h-full w-[280px] sm:w-[350px] md:w-[400px] lg:w-[450px] flex items-end lg:items-center pointer-events-none'
 				initial={{ x: 200, opacity: 0 }}
 				animate={{ x: 0, opacity: 1 }}
 				transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}>
