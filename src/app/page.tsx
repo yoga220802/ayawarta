@@ -1,5 +1,6 @@
 "use client";
 
+import FeaturesSection from "./components/landing/featureSection";
 import Header from "./components/landing/header";
 import HeroSection from "./components/landing/homeSection";
 
@@ -10,6 +11,8 @@ export default function HomePage() {
 			<Header />
 
 			<HeroSection />
+
+			<FeaturesSection />
 
 			<section
 				id='fitur'
