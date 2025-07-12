@@ -98,15 +98,10 @@ const HeroSection: React.FC = () => {
 						variants={containerVariants}
 						initial='hidden'
 						animate='visible'>
-						{/* Title with Images */}
 						<motion.h1
-							className='flex items-end justify-center lg:justify-start mb-4'
+							className='flex flex-col sm:flex-row items-center sm:items-end justify-center lg:justify-start mb-4'
 							variants={itemVariants}>
-							{/* --- REFACTOR ---
-                                - Mengembalikan ukuran tinggi ke nilai semula yang lebih proporsional.
-                                - Menambahkan margin negatif `-ml-4` pada gambar kedua untuk menariknya lebih dekat.
-                            */}
-							<div className='h-[35px] sm:h-[45px] md:h-[55px] aspect-[2.5/1] relative'>
+							<div className='h-[60px] sm:h-[45px] md:h-[55px] aspect-[2.5/1] relative '>
 								<Image
 									src={ASSETS.undanganTextImg}
 									alt='Undangan'
@@ -118,7 +113,7 @@ const HeroSection: React.FC = () => {
 									}
 								/>
 							</div>
-							<div className='h-[45px] sm:h-[55px] md:h-[70px] aspect-[2.5/1] relative -mb-1 -ml-4 sm:-ml-6'>
+							<div className='h-[75px] sm:h-[55px] md:h-[70px] aspect-[2.5/1] relative -mb-1 sm:-ml-6'>
 								<Image
 									src={ASSETS.digitalTextImg}
 									alt='Digital'
