@@ -55,7 +55,7 @@ const Pagination: React.FC<{
 	return (
 		<div className='flex items-center justify-center gap-2 mt-12'>
 			<button
-            title="Halaman Sebelumnya"
+				title='Halaman Sebelumnya'
 				onClick={() => onPageChange(currentPage - 1)}
 				disabled={currentPage === 1}
 				className='p-2 rounded-md bg-white shadow-sm disabled:opacity-50'>
@@ -65,7 +65,7 @@ const Pagination: React.FC<{
 				Halaman {currentPage} dari {totalPages}
 			</span>
 			<button
-            title="Halaman Selanjutnya"
+				title='Halaman Berikutnya'
 				onClick={() => onPageChange(currentPage + 1)}
 				disabled={currentPage === totalPages}
 				className='p-2 rounded-md bg-white shadow-sm disabled:opacity-50'>
@@ -177,7 +177,7 @@ const ThemeSection: React.FC = () => {
 								<div className='flex gap-2'>
 									{COLORS.map((color) => (
 										<button
-                                        title="Pilih Warna"
+											title='Pilih Warna'
 											key={color}
 											style={{ backgroundColor: color }}
 											className='w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 transition-transform'></button>
@@ -188,8 +188,12 @@ const ThemeSection: React.FC = () => {
 					)}
 				</AnimatePresence>
 
-				{/* Themes Grid */}
-				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8'>
+				{/* --- REFACTOR ---
+                    - `grid-cols-1` diubah menjadi `grid-cols-2`.
+                    - `sm:grid-cols-2` dihapus karena sudah menjadi default.
+                    - Ini akan membuat layout 2 kolom di mobile dan akan tetap 3 atau 4 kolom di layar yang lebih besar.
+                */}
+				<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8'>
 					{paginatedThemes.map((theme, index) => (
 						<motion.div
 							key={theme.id}
@@ -209,24 +213,24 @@ const ThemeSection: React.FC = () => {
 									}
 								/>
 							</div>
-							<div className='p-4 flex flex-col flex-grow'>
-								<div className='flex justify-between items-center mb-4'>
-									<p className='text-sm font-semibold text-gray-700'>
+							<div className='p-3 flex flex-col flex-grow'>
+								<div className='flex justify-between items-center mb-3'>
+									<p className='text-xs font-semibold text-gray-700'>
 										{theme.title} ({theme.code})
 									</p>
-									<a href='#' title='Lihat di halaman baru'>
+									<a href='#' title='Lihat di halaman baru' className='flex-shrink-0'>
 										<ExternalLink className='w-4 h-4 text-gray-400 hover:text-blue-600' />
 									</a>
 								</div>
 								<div className='mt-auto flex items-center gap-2'>
-									<button className='flex-grow flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-3 rounded-full text-sm transition-colors'>
+									<button className='flex-grow flex items-center justify-center gap-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-2 rounded-full text-xs transition-colors'>
 										<Eye className='w-4 h-4' />
 										Preview
 									</button>
 									<button
 										className='flex-shrink-0 bg-blue-100 hover:bg-blue-200 text-blue-600 p-2 rounded-full transition-colors'
 										title='Simpan tema'>
-										<Bookmark className='w-5 h-5' />
+										<Bookmark className='w-4 h-4' />
 									</button>
 								</div>
 							</div>
