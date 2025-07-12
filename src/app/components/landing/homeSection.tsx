@@ -71,9 +71,9 @@ const HeroSection: React.FC = () => {
   return (
     <section
       id="home"
-      className="w-full h-screen bg-[#F3F6FD] overflow-hidden relative"
+      className="w-full h-[calc(100vh-80px)] bg-[#F3F6FD] overflow-hidden relative"
     >
-      <div className=" w-full h-full flex flex-col lg:pt-10 lg:pl-10">
+      <div className=" w-full h-full flex flex-col pt-8 lg:pt-10 lg:pl-10">
         {/* Main Content Container - Flexbox for alignment */}
         <div className="relative z-10 container mx-auto px-4 sm:px-8 lg:px-16">
           <div className="w-full lg:w-1/2">
@@ -86,7 +86,7 @@ const HeroSection: React.FC = () => {
             >
               {/* Title with Images */}
               <motion.h1
-                className="flex items-end justify-center md:justify-start mb-4"
+                className="flex items-end justify-center lg:justify-start mb-4"
                 variants={itemVariants}
               >
                 <div className="h-[35px] sm:h-[45px] md:h-[55px] aspect-[2.5/1] relative">
@@ -155,19 +155,21 @@ const HeroSection: React.FC = () => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <div className="absolute inset-0 -z-0">
-            <Image
-              src={ASSETS.bgBlue}
-              alt="Background Biru"
-              fill
-              className="object-contain object-right !h-auto sm:pl-8 lg:pl-16 -z-0"
-              onError={(e) =>
-                (e.currentTarget.src =
-                  "https://placehold.co/1200x520/F3F6FD/333?text=BG")
-              }
-            />
+          <div className="relative">
+            <div className="absolute left-0 right-0 bottom-0 -z-0">
+              <Image
+                src={ASSETS.bgBlue}
+                alt="Background Biru"
+                fill
+                className="object-cover object-right w-auto !h-[400px] lg:!h-auto  lg:pl-16 -z-0"
+                onError={(e) =>
+                  (e.currentTarget.src =
+                    "https://placehold.co/1200x520/F3F6FD/333?text=BG")
+                }
+              />
+            </div>
           </div>
-          <div className="sm:px-8 lg:px-16 flex h-full z-10 relative">
+          <div className="sm:px-8 lg:px-16 flex h-4/5 lg:h-full z-10 relative">
             {/* User testimonial at bottom */}
             <div className="flex items-end gap-3 sm:gap-4 pl-10 pb-10">
               <div className="flex -space-x-2 sm:-space-x-3">
@@ -194,6 +196,71 @@ const HeroSection: React.FC = () => {
           </div>
         </motion.div>
       </div>
+
+      <motion.div
+        className="absolute top-0 right-0 h-full w-[280px] sm:w-[350px] md:w-[400px] lg:w-[450px] hidden lg:flex items-center pointer-events-none"
+        initial={{ x: 200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+      >
+        <div className=" w-full h-[750px]">
+          {/* Hand holding phone image */}
+          <div className="absolute inset-0 z-20">
+            <Image
+              src={ASSETS.handPhone}
+              alt="Hand holding phone"
+              fill
+              className="object-contain"
+              onError={(e) =>
+                (e.currentTarget.src =
+                  "https://placehold.co/450x750/F3F6FD/333?text=Phone")
+              }
+            />
+          </div>
+
+          {/* Phone screen with slider */}
+          <div className="absolute w-[190px] h-[409px] top-1/2 left-[50%] -translate-x-[91.5%] -translate-y-[74%] rounded-[30px] overflow-hidden bg-gray-200 shadow-inner z-10 pointer-events-auto">
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={currentSlide}
+                className="absolute inset-0 rounded-[30px] overflow-hidden"
+                initial={{ opacity: 0, x: "100%" }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: "-100%" }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+              >
+                <Image
+                  src={ASSETS.sliderImages[currentSlide]}
+                  alt={`Contoh Desain ${currentSlide + 1}`}
+                  fill
+                  className="object-cover"
+                  onError={(e) =>
+                    (e.currentTarget.src = `https://placehold.co/190x409/CCCCCC/333?text=Slide+${
+                      currentSlide + 1
+                    }`)
+                  }
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Navigation buttons */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-[5px] top-1/2 -translate-y-[100%] bg-white/60 p-2 rounded-full text-gray-800 hover:bg-white transition-colors shadow-md z-30 pointer-events-auto"
+            aria-label="Previous Slide"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-[150px] top-1/2 -translate-y-[100%] bg-white/60 p-2 rounded-full text-gray-800 hover:bg-white transition-colors shadow-md z-30 pointer-events-auto"
+            aria-label="Next Slide"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
+      </motion.div>
     </section>
   );
 };
