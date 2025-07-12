@@ -4,6 +4,7 @@ import FeaturesSection from "./components/landing/featureSection";
 import Header from "./components/landing/header";
 import HeroSection from "./components/landing/homeSection";
 import PricingSection from "./components/landing/pricingSection";
+import TestimonialSection from "./components/landing/testimonialSection";
 import ThemeSection from "./components/landing/themeSection";
 
 
@@ -19,6 +20,8 @@ export default function HomePage() {
 			<PricingSection />
 
 			<ThemeSection />
+
+			<TestimonialSection />
 
 			<section
 				id='fitur'
