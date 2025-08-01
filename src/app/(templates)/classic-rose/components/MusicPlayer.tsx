@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // --- Interfaces untuk TypeScript yang lebih ketat ---
-interface YTPlayer {
+// Mendefinisikan struktur objek Player dari YouTube API
+interface YTPlayerInstance {
 	playVideo: () => void;
 	mute: () => void;
 	unMute: () => void;
@@ -12,14 +13,20 @@ interface YTPlayer {
 	setVolume: (volume: number) => void;
 }
 
+// Mendefinisikan struktur event dari YouTube API
 interface YTEvent {
-	target: YTPlayer;
+	target: YTPlayerInstance;
 }
 
-// Menambahkan properti YT ke object window global
+// Menambahkan properti YT ke object window global dengan tipe yang lebih spesifik
 declare global {
 	interface Window {
-		YT: any;
+		YT?: {
+			Player: new (
+				elementId: string,
+				options: Record<string, unknown>
+			) => YTPlayerInstance;
+		};
 		onYouTubeIframeAPIReady?: () => void;
 	}
 }
@@ -68,9 +75,7 @@ const getYoutubeVideoId = (url: string): string | null => {
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 	const [isPlaying, setIsPlaying] = useState(true);
-	// FIX: Memberikan tipe yang spesifik pada ref
-	const playerRef = useRef<YTPlayer | null>(null);
-
+	const playerRef = useRef<YTPlayerInstance | null>(null);
 	const videoId = getYoutubeVideoId(videoUrl);
 
 	useEffect(() => {
@@ -79,30 +84,37 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 			return;
 		}
 
-		(window as any).onYouTubeIframeAPIReady = () => {
-			playerRef.current = new window.YT.Player("youtube-player", {
-				height: "0",
-				width: "0",
-				videoId: videoId,
-				playerVars: {
-					autoplay: 1,
-					loop: 1,
-					playlist: videoId,
-				},
-				events: {
-					// FIX: Memberikan tipe pada event
-					onReady: (event: YTEvent) => {
-						event.target.playVideo();
-						event.target.setVolume(50);
+		// FIX: Menghindari 'window as any' dengan memeriksa keberadaan window.YT
+		const setupPlayer = () => {
+			if (window.YT && window.YT.Player) {
+				playerRef.current = new window.YT.Player("youtube-player", {
+					height: "0",
+					width: "0",
+					videoId: videoId,
+					playerVars: {
+						autoplay: 1,
+						loop: 1,
+						playlist: videoId,
 					},
-				},
-			});
+					events: {
+						onReady: (event: YTEvent) => {
+							event.target.playVideo();
+							event.target.setVolume(50);
+						},
+					},
+				});
+			}
 		};
 
-		const tag = document.createElement("script");
-		tag.src = "https://www.youtube.com/iframe_api";
-		const firstScriptTag = document.getElementsByTagName("script")[0];
-		firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+		if (!window.YT) {
+			window.onYouTubeIframeAPIReady = setupPlayer;
+			const tag = document.createElement("script");
+			tag.src = "https://www.youtube.com/iframe_api";
+			const firstScriptTag = document.getElementsByTagName("script")[0];
+			firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+		} else {
+			setupPlayer();
+		}
 
 		return () => {
 			if (playerRef.current) {
@@ -110,7 +122,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 			}
 			window.onYouTubeIframeAPIReady = undefined;
 		};
-	}, [videoId, videoUrl]);
+	}, [videoId]);
 
 	const toggleMusic = () => {
 		if (!playerRef.current) return;
@@ -126,7 +138,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 	return (
 		<>
 			<div id='youtube-player' className='absolute -top-96'></div>
-
 			<motion.button
 				onClick={toggleMusic}
 				className='fixed bottom-5 right-5 z-50 w-12 h-12 bg-primary-rose text-white rounded-full flex items-center justify-center shadow-lg'
