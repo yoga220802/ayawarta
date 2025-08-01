@@ -39,13 +39,15 @@ const PersonCard: React.FC<{ person: Person; align: "left" | "right" }> = ({
 				}
 			/>
 		</div>
-		<h3 className='font-serif text-3xl text-[#5C4033]'>{person.name}</h3>
-		<p className='font-sans text-sm mt-2 text-gray-600'>{person.parents}</p>
+		{/* FIX: Mengganti `font-serif` menjadi `font-script` (Alex Brush) untuk nama */}
+		<h3 className='font-script text-4xl text-[#5C4033]'>{person.name}</h3>
+		{/* FIX: Mengganti `font-sans` menjadi `font-body-alt` (Manrope) untuk detail */}
+		<p className='font-body-alt text-sm mt-2 text-gray-600'>{person.parents}</p>
 		<a
 			href={`https://instagram.com/${person.instagram}`}
 			target='_blank'
 			rel='noopener noreferrer'
-			className='inline-flex items-center gap-2 mt-3 text-sm text-[#8D6E63] hover:text-[#5C4033]'>
+			className='font-body-alt inline-flex items-center gap-2 mt-3 text-sm text-[#8D6E63] hover:text-[#5C4033]'>
 			<Instagram size={16} />
 			<span>@{person.instagram}</span>
 		</a>
@@ -56,10 +58,12 @@ const CoupleSection: React.FC<CoupleProps> = ({ groom, bride }) => {
 	return (
 		<section className='py-20 bg-[#FDF8F8] text-center'>
 			<div className='container mx-auto px-8'>
-				<p className='font-serif text-xl italic text-gray-700 mb-4'>
+				{/* FIX: Mengganti `font-serif` menjadi `font-alice` */}
+				<p className='font-alice text-xl italic text-gray-700 mb-4'>
 					بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
 				</p>
-				<p className='max-w-2xl mx-auto text-gray-600'>
+				{/* FIX: Menggunakan `font-body-alt` untuk teks paragraf */}
+				<p className='max-w-2xl mx-auto text-gray-600 font-body-alt'>
 					Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang
 					Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami:
 				</p>

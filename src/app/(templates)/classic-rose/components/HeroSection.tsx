@@ -10,7 +10,7 @@ interface HeroProps {
 
 const HeroSection: React.FC<HeroProps> = ({ coupleNames, heroImage }) => {
 	return (
-		<section className='relative min-h-screen flex flex-col items-center justify-center text-center p-8 overflow-hidden'>
+		<section className='relative min-h-screen flex flex-col items-center justify-center text-center p-8 overflow-hidden bg-[#FDF8F8]'>
 			<div className='absolute inset-0 z-0'>
 				<Image
 					src='/images/themes/classic-rose/bg-pattern.svg'
@@ -26,7 +26,8 @@ const HeroSection: React.FC<HeroProps> = ({ coupleNames, heroImage }) => {
 				initial={{ opacity: 0, scale: 0.8 }}
 				animate={{ opacity: 1, scale: 1 }}
 				transition={{ duration: 1, ease: "easeOut" }}>
-				<p className='font-sans text-sm tracking-widest text-gray-600 mb-4'>
+				{/* FIX: Mengganti `font-sans` menjadi `font-body-alt` (Manrope) */}
+				<p className='font-body-alt text-sm tracking-widest text-gray-600 mb-4'>
 					Undangan Pernikahan
 				</p>
 				<div className='relative w-64 h-64 mx-auto mb-6'>
@@ -50,19 +51,14 @@ const HeroSection: React.FC<HeroProps> = ({ coupleNames, heroImage }) => {
 						/>
 					</div>
 				</div>
-				<h1 className='font-serif text-5xl text-[#5C4033]'>
-					{coupleNames.split("&")[0]}
+
+				{/* FIX: Mengganti `font-serif` menjadi `font-heading` (Playfair Display) */}
+				<h1 className='font-heading text-5xl text-[#5C4033]'>
+					{coupleNames.split(" & ")[0]}
 				</h1>
-				<h1 className='font-serif text-5xl text-[#5C4033]'>
-					& {coupleNames.split("&")[1]}
+				<h1 className='font-heading text-5xl text-[#5C4033]'>
+					& {coupleNames.split(" & ")[1]}
 				</h1>
-				<div className='mt-8'>
-					<p className='text-sm text-gray-500'>Kepada Yth. Bapak/Ibu/Saudara/i</p>
-					<p className='text-lg font-bold text-gray-800 mt-1'>Nama Tamu</p>
-				</div>
-				<button className='mt-8 bg-[#8D6E63] text-white font-sans font-bold py-3 px-8 rounded-full shadow-lg hover:bg-[#795548] transition-colors'>
-					Buka Undangan
-				</button>
 			</motion.div>
 		</section>
 	);

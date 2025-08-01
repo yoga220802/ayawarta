@@ -39,21 +39,23 @@ const CountdownSection: React.FC<CountdownProps> = ({ targetDate }) => {
 	];
 
 	return (
-		<section className='py-20 bg-[#FDF8F8]'>
+		<section className='py-20 bg-white'>
 			<div className='container mx-auto px-8 text-center'>
 				<div className='grid grid-cols-4 gap-4 max-w-lg mx-auto'>
 					{timeUnits.map((unit, index) => (
 						<motion.div
 							key={unit.label}
-							className='bg-white p-4 rounded-lg shadow-md'
+							className='bg-rose-50 p-4 rounded-lg shadow-md'
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.5, delay: index * 0.1 }}
 							viewport={{ once: true }}>
-							<p className='font-serif text-4xl text-[#5C4033]'>
+							{/* FIX: Mengganti `font-serif` menjadi `font-heading` (Playfair Display) untuk angka */}
+							<p className='font-heading text-4xl text-[#5C4033]'>
 								{String(unit.value).padStart(2, "0")}
 							</p>
-							<p className='font-sans text-xs text-gray-500 mt-1'>{unit.label}</p>
+							{/* FIX: Mengganti `font-sans` menjadi `font-body-alt` (Manrope) untuk label */}
+							<p className='font-body-alt text-xs text-gray-500 mt-1'>{unit.label}</p>
 						</motion.div>
 					))}
 				</div>

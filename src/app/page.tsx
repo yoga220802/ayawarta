@@ -10,7 +10,7 @@ import ThemeSection from "./components/landing/themeSection";
 
 export default function HomePage() {
 	return (
-		<main className='font-sans'>
+		<main>
 			<Header />
 
 			<HeroSection />
