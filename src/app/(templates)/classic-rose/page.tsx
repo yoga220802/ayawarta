@@ -11,6 +11,7 @@ import CountdownSection from "./components/CountdownSection";
 import CoupleSection from "./components/CoupleSection";
 import EventSection from "./components/EventSection";
 import GallerySection from "./components/GallerySection";
+import MusicPlayer from "./components/MusicPlayer";
 
 // Data dummy untuk seluruh undangan.
 const invitationData = {
@@ -76,29 +77,22 @@ const invitationData = {
 				"Kini, kami berdiri di ambang babak baru. Dengan restu dan doa, kami siap mengikat janji suci, melanjutkan perjalanan ini sebagai sepasang kekasih sejati. Inilah awal dari petualangan abadi kami, sebuah kisah yang akan kami tulis bersama, selamanya.",
 		},
 	],
+	musicUrl: "https://youtu.be/qf1W5iIRTe8?si=NJPJTeV7afylQeLQ",
 };
 
 // Komponen utama yang berisi logika state
 const InvitationContent = () => {
-	// State untuk mengontrol tampilan opening vs main content
 	const [isOpened, setIsOpened] = useState(false);
-
-	// Hook untuk membaca query parameter dari URL
 	const searchParams = useSearchParams();
 	const guestName = searchParams.get("to");
 
-	// Fungsi yang akan dipanggil oleh tombol "Buka Undangan"
 	const handleOpenInvitation = () => {
 		setIsOpened(true);
-		// Optional: Mainkan musik saat undangan dibuka
-		// const audio = document.getElementById('bg-music');
-		// audio?.play();
 	};
 
 	return (
 		<AnimatePresence>
 			{!isOpened ? (
-				// Tampilan Opening/Greeting
 				<motion.div
 					key='opening'
 					exit={{ opacity: 0, y: -50 }}
@@ -110,17 +104,18 @@ const InvitationContent = () => {
 					/>
 				</motion.div>
 			) : (
-				// Tampilan Isi Undangan setelah dibuka
 				<motion.div
 					key='content'
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ duration: 0.8 }}>
+					{/* FIX: Render MusicPlayer saat undangan dibuka */}
+					<MusicPlayer videoUrl={invitationData.musicUrl} />
+
 					<HeroSection
 						coupleNames={`${invitationData.groom.name} & ${invitationData.bride.name}`}
 						heroImage={invitationData.heroImage}
 					/>
-					<CountdownSection targetDate={invitationData.weddingDate} />
 					<CoupleSection groom={invitationData.groom} bride={invitationData.bride} />
 					<EventSection
 						events={invitationData.events}
