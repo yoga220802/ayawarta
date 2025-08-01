@@ -48,3 +48,15 @@
 .nav-link-hover.active::after {
   width: 100%;
 }
+
+:root {
+  --color-primary-rose: #630718;
+}
+
+.bg-primary-rose {
+  background-color: var(--color-primary-rose);
+}
+
+.text-primary-rose {
+  color: var(--color-primary-rose);
+}
