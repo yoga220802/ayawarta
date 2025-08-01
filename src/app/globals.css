@@ -1,5 +1,28 @@
 @import "tailwindcss";
 
+/* Kita definisikan utility class untuk font secara manual menggunakan CSS biasa.
+  Ini adalah cara yang paling stabil dan bebas dari potensi bug parser @theme.
+*/
+.font-body {
+  font-family: var(--font-noto-sans-thai);
+}
+
+.font-heading {
+  font-family: var(--font-playfair);
+}
+
+.font-body-alt {
+  font-family: var(--font-manrope);
+}
+
+.font-script {
+  font-family: var(--font-alex-brush);
+}
+
+.font-alice {
+  font-family: var(--font-alice);
+}
+
 
 /* Efek garis bawah untuk link navigasi di header */
 .nav-link-hover {
@@ -24,4 +47,16 @@
 .nav-link-hover:hover::after,
 .nav-link-hover.active::after {
   width: 100%;
+}
+
+:root {
+  --color-primary-rose: #630718;
+}
+
+.bg-primary-rose {
+  background-color: var(--color-primary-rose);
+}
+
+.text-primary-rose {
+  color: var(--color-primary-rose);
 }
