@@ -3,7 +3,28 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Ikon untuk tombol mute/unmute
+// --- Interfaces untuk TypeScript yang lebih ketat ---
+interface YTPlayer {
+	playVideo: () => void;
+	mute: () => void;
+	unMute: () => void;
+	destroy: () => void;
+	setVolume: (volume: number) => void;
+}
+
+interface YTEvent {
+	target: YTPlayer;
+}
+
+// Menambahkan properti YT ke object window global
+declare global {
+	interface Window {
+		YT: any;
+		onYouTubeIframeAPIReady?: () => void;
+	}
+}
+
+// --- Icons ---
 const VolumeOnIcon = ({ className }: { className?: string }) => (
 	<svg
 		className={className}
@@ -38,7 +59,6 @@ interface MusicPlayerProps {
 	videoUrl: string;
 }
 
-// FIX: Membuat fungsi yang lebih andal untuk mengekstrak ID video YouTube
 const getYoutubeVideoId = (url: string): string | null => {
 	const regExp =
 		/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -48,50 +68,47 @@ const getYoutubeVideoId = (url: string): string | null => {
 
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 	const [isPlaying, setIsPlaying] = useState(true);
-	const playerRef = useRef<any>(null);
+	// FIX: Memberikan tipe yang spesifik pada ref
+	const playerRef = useRef<YTPlayer | null>(null);
 
-	// FIX: Menggunakan fungsi baru untuk mendapatkan ID video
 	const videoId = getYoutubeVideoId(videoUrl);
 
 	useEffect(() => {
-		// Jangan lakukan apa pun jika ID video tidak valid
 		if (!videoId) {
 			console.error("Invalid YouTube URL provided:", videoUrl);
 			return;
 		}
 
-		// Fungsi ini akan dipanggil oleh YouTube Iframe API setelah script-nya termuat
 		(window as any).onYouTubeIframeAPIReady = () => {
-			playerRef.current = new (window as any).YT.Player("youtube-player", {
+			playerRef.current = new window.YT.Player("youtube-player", {
 				height: "0",
 				width: "0",
 				videoId: videoId,
 				playerVars: {
 					autoplay: 1,
 					loop: 1,
-					playlist: videoId, // Diperlukan agar loop berfungsi
+					playlist: videoId,
 				},
 				events: {
-					onReady: (event: any) => {
+					// FIX: Memberikan tipe pada event
+					onReady: (event: YTEvent) => {
 						event.target.playVideo();
-						event.target.setVolume(50); // Atur volume awal
+						event.target.setVolume(50);
 					},
 				},
 			});
 		};
 
-		// Muat YouTube Iframe API script secara dinamis
 		const tag = document.createElement("script");
 		tag.src = "https://www.youtube.com/iframe_api";
 		const firstScriptTag = document.getElementsByTagName("script")[0];
 		firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
 
-		// Cleanup function untuk menghapus script dan instance saat komponen unmount
 		return () => {
 			if (playerRef.current) {
 				playerRef.current.destroy();
 			}
-			(window as any).onYouTubeIframeAPIReady = undefined;
+			window.onYouTubeIframeAPIReady = undefined;
 		};
 	}, [videoId, videoUrl]);
 
@@ -108,10 +125,8 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 
 	return (
 		<>
-			{/* Div ini adalah tempat YouTube player akan di-render, tapi disembunyikan */}
 			<div id='youtube-player' className='absolute -top-96'></div>
 
-			{/* Floating Action Button (FAB) */}
 			<motion.button
 				onClick={toggleMusic}
 				className='fixed bottom-5 right-5 z-50 w-12 h-12 bg-primary-rose text-white rounded-full flex items-center justify-center shadow-lg'

@@ -48,8 +48,6 @@ interface EventSectionProps {
 }
 
 // --- Sub-Components ---
-
-// Komponen Countdown Timer yang akan ada di setiap kartu acara
 const CountdownTimer: React.FC<{ targetDate: Date }> = ({ targetDate }) => {
 	const calculateTimeLeft = () => {
 		const difference = +targetDate - +new Date();
@@ -96,7 +94,6 @@ const CountdownTimer: React.FC<{ targetDate: Date }> = ({ targetDate }) => {
 	);
 };
 
-// Komponen Kartu untuk setiap acara
 const EventCard: React.FC<{ event: Event; targetDate: Date }> = ({
 	event,
 	targetDate,
@@ -105,7 +102,6 @@ const EventCard: React.FC<{ event: Event; targetDate: Date }> = ({
 
 	return (
 		<div className='relative w-full p-6 text-center text-primary-rose bg-white/60 backdrop-blur-sm rounded-2xl'>
-			{/* Bingkai Dekoratif */}
 			<div className='absolute -top-4 -left-4 w-28 h-28 md:w-44 md:h-44'>
 				<Image
 					src='/images/themes/classic-rose/event-frame.png'
@@ -121,10 +117,8 @@ const EventCard: React.FC<{ event: Event; targetDate: Date }> = ({
 				/>
 			</div>
 
-			{/* Konten Kartu */}
 			<div className='relative z-10 flex flex-col items-center gap-4'>
 				<h3 className='font-alice text-3xl'>{event.name}</h3>
-				{/* FIX: Membalik urutan tanggal dan bulan/tahun */}
 				<div className='flex items-center justify-center gap-4'>
 					<p className='font-alice text-7xl font-bold'>{day}</p>
 					<div className='text-left'>
@@ -158,14 +152,9 @@ const EventCard: React.FC<{ event: Event; targetDate: Date }> = ({
 
 // --- Main Component ---
 const EventSection: React.FC<EventSectionProps> = ({ events, targetDate }) => {
-	const mapEmbedLink = events[0]?.mapLink.replace(
-		"/maps/place/",
-		"/maps/embed/v1/place?key=YOUR_API_KEY&q="
-	);
-
+	// FIX: Menghapus variabel mapEmbedLink yang tidak terpakai
 	return (
 		<section className='relative py-20 md:py-32 bg-[#FDF8F8] overflow-hidden'>
-			{/* Latar Belakang dan Dekorasi */}
 			<div className='absolute inset-0 z-0'>
 				<Image
 					src='/images/themes/classic-rose/opening/bg.png'
@@ -191,7 +180,6 @@ const EventSection: React.FC<EventSectionProps> = ({ events, targetDate }) => {
 				</div>
 			</div>
 
-			{/* Konten Utama */}
 			<div className='relative z-10 container mx-auto px-4 sm:px-8 max-w-md flex flex-col items-center gap-10'>
 				<motion.div
 					className='px-8 py-2 rounded-lg bg-white/60 backdrop-blur-sm'
@@ -214,7 +202,6 @@ const EventSection: React.FC<EventSectionProps> = ({ events, targetDate }) => {
 					</motion.div>
 				))}
 
-				{/* Peta Lokasi */}
 				<motion.div
 					className='w-full aspect-video rounded-lg overflow-hidden shadow-lg mt-4'
 					initial={{ opacity: 0, y: 50 }}

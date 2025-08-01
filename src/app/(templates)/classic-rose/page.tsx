@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 // Impor semua komponen section
 import OpeningSection from "./components/OpeningSection";
 import HeroSection from "./components/HeroSection";
-import CountdownSection from "./components/CountdownSection";
 import CoupleSection from "./components/CoupleSection";
 import EventSection from "./components/EventSection";
 import GallerySection from "./components/GallerySection";
