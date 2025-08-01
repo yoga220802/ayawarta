@@ -27,7 +27,7 @@ const invitationData = {
 		photo: "/images/themes/classic-rose/bride.jpg",
 	},
 	heroImage: "/images/themes/classic-rose/opening/foto.png",
-	weddingDate: new Date("2025-02-28T08:00:00"),
+	weddingDate: new Date("2025-10-28T08:00:00"),
 	events: [
 		{
 			name: "Akad Nikah",
@@ -48,13 +48,33 @@ const invitationData = {
 			mapLink: "https://maps.app.goo.gl/rCpzs7gD7iHPNQU59",
 		},
 	],
-	gallery: [
-		"/images/themes/classic-rose/photo sample.jpg",
-		"/images/themes/classic-rose/photo sample.jpg",
-		"/images/themes/classic-rose/photo sample.jpg",
-		"/images/themes/classic-rose/photo sample.jpg",
-		"/images/themes/classic-rose/photo sample.jpg",
-		"/images/themes/classic-rose/photo sample.jpg",
+	gallery: {
+		videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+		images: [
+			"/images/themes/classic-rose/photo sample.jpg",
+			"/images/themes/classic-rose/photo sample.jpg",
+			"/images/themes/classic-rose/photo sample.jpg",
+			"/images/themes/classic-rose/photo sample.jpg",
+			"/images/themes/classic-rose/photo sample.jpg",
+			"/images/themes/classic-rose/photo sample.jpg",
+		],
+	},
+	loveStory: [
+		{
+			title: "Awal",
+			content:
+				"Kisah kami berawal dari ketidaksengajaan di sebuah kedai kopi senja. Obrolan ringan tentang buku dan musik ternyata membuka pintu ke sebuah cerita yang tak pernah kami duga. Setiap pertemuan setelahnya seolah menegaskan bahwa kami telah menemukan potongan puzzle yang hilang.",
+		},
+		{
+			title: "Lamaran",
+			content:
+				"Di bawah langit berbintang, di tempat yang sama di mana kami pertama kali berbagi tawa, sebuah pertanyaan sederhana diucapkan dengan hati berdebar. Jawaban 'iya' yang terucap menjadi janji awal untuk selamanya, disaksikan oleh semesta yang turut berbahagia.",
+		},
+		{
+			title: "Menikah",
+			content:
+				"Kini, kami berdiri di ambang babak baru. Dengan restu dan doa, kami siap mengikat janji suci, melanjutkan perjalanan ini sebagai sepasang kekasih sejati. Inilah awal dari petualangan abadi kami, sebuah kisah yang akan kami tulis bersama, selamanya.",
+		},
 	],
 };
 
@@ -102,8 +122,14 @@ const InvitationContent = () => {
 					/>
 					<CountdownSection targetDate={invitationData.weddingDate} />
 					<CoupleSection groom={invitationData.groom} bride={invitationData.bride} />
-					<EventSection events={invitationData.events} />
-					<GallerySection images={invitationData.gallery} />
+					<EventSection
+						events={invitationData.events}
+						targetDate={invitationData.weddingDate}
+					/>
+					<GallerySection
+						gallery={invitationData.gallery}
+						loveStory={invitationData.loveStory}
+					/>
 				</motion.div>
 			)}
 		</AnimatePresence>

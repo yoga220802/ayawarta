@@ -13,7 +13,7 @@ const HeroSection: React.FC<HeroProps> = ({ coupleNames, heroImage }) => {
 		<section className='relative min-h-screen flex flex-col items-center justify-center text-center p-8 overflow-hidden bg-[#FDF8F8]'>
 			<div className='absolute inset-0 z-0'>
 				<Image
-					src='/images/themes/classic-rose/bg-pattern.svg'
+					src='/images/themes/classic-rose/bg-opening.png'
 					alt='Background Pattern'
 					layout='fill'
 					objectFit='cover'
@@ -32,13 +32,13 @@ const HeroSection: React.FC<HeroProps> = ({ coupleNames, heroImage }) => {
 				</p>
 				<div className='relative w-64 h-64 mx-auto mb-6'>
 					<Image
-						src='/images/themes/classic-rose/hero-frame.svg'
+						src='/images/themes/classic-rose/opening/bingkai.png'
 						alt='Frame'
 						layout='fill'
 						className='z-10'
 						onError={(e) => (e.currentTarget.style.display = "none")}
 					/>
-					<div className='absolute inset-[10px] rounded-full overflow-hidden'>
+					<div className='absolute inset-[35px] rounded-full overflow-hidden'>
 						<Image
 							src={heroImage}
 							alt='Bima & Anisa'
