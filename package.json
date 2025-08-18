@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",
+    "firebase": "^12.1.0",
     "framer-motion": "^12.23.1",
     "lucide-react": "^0.515.0",
     "next": "15.3.3",

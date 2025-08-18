@@ -35,10 +35,15 @@ const GallerySection: React.FC<GallerySectionProps> = ({
 	theme,
 }) => {
 	const [playVideo, setPlayVideo] = useState(false);
+
+	// Fungsi untuk mendapatkan embed URL YouTube
 	const getEmbedUrl = (url: string) => {
 		const videoId = url.split("v=")[1]?.split("&")[0];
 		return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1` : "";
 	};
+
+	// Periksa apakah URL video valid
+	const isVideoValid = gallery.videoUrl && getEmbedUrl(gallery.videoUrl) !== "";
 
 	return (
 		<section className='relative'>
@@ -67,7 +72,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({
 					</p>
 					<div className='grid grid-cols-3 grid-rows-4 gap-2 mt-6 h-[500px]'>
 						<div className='col-span-3 row-span-2 relative rounded-lg overflow-hidden group bg-black'>
-							{!playVideo ? (
+							{isVideoValid && !playVideo ? (
 								<>
 									<Image
 										src={gallery.images[0]}
@@ -81,14 +86,21 @@ const GallerySection: React.FC<GallerySectionProps> = ({
 										<PlayIcon className='w-16 h-16 text-white/80 drop-shadow-lg' />
 									</div>
 								</>
-							) : (
+							) : isVideoValid && playVideo ? (
 								<iframe
-									src={getEmbedUrl(gallery.videoUrl)}
+									src={getEmbedUrl(gallery.videoUrl!)}
 									title='YouTube video player'
 									frameBorder='0'
 									allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
 									allowFullScreen
 									className='w-full h-full'></iframe>
+							) : (
+								<Image
+									src={gallery.images[0]}
+									alt='Gallery Image'
+									fill
+									className='object-cover'
+								/>
 							)}
 						</div>
 						{gallery.images.slice(1, 6).map((imgSrc, index) => (

@@ -20,7 +20,7 @@ export const invitationData = {
     events: [
         {
             name: "Akad Nikah",
-            date: "28 Februari 2025",
+            date: "28 Agustus 2025",
             time: "08:00 WIB - selesai",
             location: "Graha Intan Balarea",
             address:
@@ -29,7 +29,7 @@ export const invitationData = {
         },
         {
             name: "Resepsi",
-            date: "28 Februari 2025",
+            date: "31 Agustus 2025",
             time: "10:00 WIB - selesai",
             location: "Graha Intan Balarea",
             address:

@@ -18,14 +18,27 @@ import ClassicRoseClientView from "./components/ClassicRoseClientView";
 export default async function ClassicRosePage({
 	params,
 }: {
-	params: { variant: string };
+	params: { variant: string; slug?: string };
 }) {
 	// 1. Logika server: mengambil params dan mendapatkan konfigurasi tema.
 	const themeConfig = getClassicRoseThemeConfig(params.variant);
 
-	// 2. Data bisa diambil dari database di sini jika perlu.
-	const data = invitationData;
+	// 2. Data bisa diambil dari database atau dummy-data.
+	const data = params.slug
+		? (await import("@/lib/invitations")).getInvitationBySlug(params.slug)?.data
+		: (await import("@/lib/dummy-data/wedding/dummy-wedding")).invitationData;
+
+	// Jika data tidak ditemukan, lempar error
+	if (!data) {
+		throw new Error("Invitation data not found");
+	}
 
 	// 3. Render Client Component dan kirim data sebagai props.
-	return <ClassicRoseClientView themeConfig={themeConfig} data={data} />;
+	return (
+		<ClassicRoseClientView
+			invitationSlug={params.slug || "default"} // Tambahkan invitationSlug
+			themeConfig={themeConfig}
+			data={data}
+		/>
+	);
 }

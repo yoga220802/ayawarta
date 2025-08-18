@@ -12,15 +12,17 @@ import HeroSection from "./HeroSection";
 import CoupleSection from "./CoupleSection";
 import EventSection from "./EventSection";
 import GallerySection from "./GallerySection";
-import GiftSection from "./GiftSection"; // <-- Impor section baru
+import GiftSection from "./GiftSection";
+import WishesSection from "./WishesSection";
 import MusicPlayer from "./MusicPlayer";
 import { InvitationData } from "@/lib/dummy-data/wedding/dummy-wedding";
 
-// Komponen ini dibungkus Suspense agar bisa menggunakan useSearchParams
 function InvitationView({
+	invitationSlug,
 	themeConfig,
 	data,
 }: {
+	invitationSlug: string;
 	themeConfig: ClassicRoseThemeConfig;
 	data: InvitationData;
 }) {
@@ -70,7 +72,6 @@ function InvitationView({
 							<CoupleSection data={data.couple} theme={themeConfig} />
 							<EventSection
 								events={data.events}
-								targetDate={data.weddingDate}
 								theme={themeConfig}
 							/>
 							<GallerySection
@@ -78,8 +79,8 @@ function InvitationView({
 								loveStory={data.loveStory}
 								theme={themeConfig}
 							/>
-							{/* Render section baru di sini */}
 							<GiftSection gifts={data.gifts} theme={themeConfig} />
+							<WishesSection invitationSlug={invitationSlug} theme={themeConfig} />
 						</motion.div>
 					</main>
 				)}
@@ -88,11 +89,12 @@ function InvitationView({
 	);
 }
 
-// Komponen utama sisi client yang akan diekspor
 export default function ClassicRoseClientView({
+	invitationSlug,
 	themeConfig,
 	data,
 }: {
+	invitationSlug: string;
 	themeConfig: ClassicRoseThemeConfig;
 	data: InvitationData;
 }) {
@@ -103,7 +105,11 @@ export default function ClassicRoseClientView({
 					Loading Guest...
 				</div>
 			}>
-			<InvitationView themeConfig={themeConfig} data={data} />
+			<InvitationView
+				invitationSlug={invitationSlug}
+				themeConfig={themeConfig}
+				data={data}
+			/>
 		</Suspense>
 	);
 }
