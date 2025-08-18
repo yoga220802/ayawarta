@@ -36,6 +36,39 @@ const MapIcon = ({ className }: { className?: string }) => (
 	</svg>
 );
 
+// --- Helper Function ---
+/**
+ * Mengubah string tanggal dan waktu dari data menjadi objek Date.
+ * Contoh input: "20 Desember 2025", "09:00 WIB - 10:00 WIB"
+ */
+const parseEventDateTime = (dateStr: string, timeStr: string): Date => {
+	const monthMap: { [key: string]: number } = {
+		Januari: 0,
+		Februari: 1,
+		Maret: 2,
+		April: 3,
+		Mei: 4,
+		Juni: 5,
+		Juli: 6,
+		Agustus: 7,
+		September: 8,
+		Oktober: 9,
+		November: 10,
+		Desember: 11,
+	};
+	const [day, monthName, year] = dateStr.split(" ");
+	const startTime = timeStr.split(" ")[0]; // Ambil waktu mulai, e.g., "09:00"
+	const [hours, minutes] = startTime.split(":");
+
+	return new Date(
+		Number(year),
+		monthMap[monthName],
+		Number(day),
+		Number(hours),
+		Number(minutes)
+	);
+};
+
 // --- Sub-Components ---
 const CountdownTimer: React.FC<{ targetDate: Date }> = ({ targetDate }) => {
 	const calculateTimeLeft = () => {
@@ -56,9 +89,9 @@ const CountdownTimer: React.FC<{ targetDate: Date }> = ({ targetDate }) => {
 	const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
 	useEffect(() => {
-		const timer = setTimeout(() => setTimeLeft(calculateTimeLeft()), 1000);
-		return () => clearTimeout(timer);
-	});
+		const timer = setInterval(() => setTimeLeft(calculateTimeLeft()), 1000);
+		return () => clearInterval(timer);
+	}, [targetDate]);
 
 	const timeUnits = [
 		{ label: "Hari", value: timeLeft.days },
@@ -88,10 +121,11 @@ const CountdownTimer: React.FC<{ targetDate: Date }> = ({ targetDate }) => {
 
 const EventCard: React.FC<{
 	event: InvitationData["events"][0];
-	targetDate: Date;
 	theme: ThemeConfig;
-}> = ({ event, targetDate, theme }) => {
+}> = ({ event, theme }) => {
 	const [day, month, year] = event.date.split(" ");
+	// Setiap card sekarang membuat targetDate-nya sendiri
+	const eventTargetDate = parseEventDateTime(event.date, event.time);
 
 	return (
 		<div
@@ -103,7 +137,6 @@ const EventCard: React.FC<{
 			<div className='absolute -bottom-4 -right-4 w-28 h-28 md:w-44 md:h-44 transform rotate-180'>
 				<Image src={theme.assets.eventFrame} alt='Bingkai' fill />
 			</div>
-
 			<div
 				className='relative z-10 flex flex-col items-center gap-4'
 				style={{ fontFamily: "var(--font-body)" }}>
@@ -133,7 +166,7 @@ const EventCard: React.FC<{
 					Lokasi Acara
 				</a>
 				<div className='w-full max-w-xs mt-2'>
-					<CountdownTimer targetDate={targetDate} />
+					<CountdownTimer targetDate={eventTargetDate} />
 				</div>
 			</div>
 		</div>
@@ -143,15 +176,10 @@ const EventCard: React.FC<{
 // --- Main Component ---
 interface EventSectionProps {
 	events: InvitationData["events"];
-	targetDate: Date;
 	theme: ThemeConfig;
 }
 
-const EventSection: React.FC<EventSectionProps> = ({
-	events,
-	targetDate,
-	theme,
-}) => {
+const EventSection: React.FC<EventSectionProps> = ({ events, theme }) => {
 	return (
 		<section className='relative'>
 			<CornerFlower flowerSrc={theme.assets.flower} position='top-left' />
@@ -181,7 +209,7 @@ const EventSection: React.FC<EventSectionProps> = ({
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.8, delay: index * 0.2 }}>
-						<EventCard event={event} targetDate={targetDate} theme={theme} />
+						<EventCard event={event} theme={theme} />
 					</motion.div>
 				))}
 
