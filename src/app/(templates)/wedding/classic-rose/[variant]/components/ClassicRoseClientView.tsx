@@ -1,5 +1,5 @@
 // src/components/templates/classic-rose/ClassicRoseClientView.tsx
-"use client"; // Directive ini harus ada di paling atas file
+"use client";
 
 import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -12,6 +12,7 @@ import HeroSection from "./HeroSection";
 import CoupleSection from "./CoupleSection";
 import EventSection from "./EventSection";
 import GallerySection from "./GallerySection";
+import GiftSection from "./GiftSection"; // <-- Impor section baru
 import MusicPlayer from "./MusicPlayer";
 import { InvitationData } from "@/lib/dummy-data/wedding/dummy-wedding";
 
@@ -77,6 +78,8 @@ function InvitationView({
 								loveStory={data.loveStory}
 								theme={themeConfig}
 							/>
+							{/* Render section baru di sini */}
+							<GiftSection gifts={data.gifts} theme={themeConfig} />
 						</motion.div>
 					</main>
 				)}

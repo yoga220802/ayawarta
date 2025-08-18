@@ -66,6 +66,20 @@ export const invitationData = {
         },
     ],
     musicUrl: "https://youtu.be/qf1W5iIRTe8?si=NJPJTeV7afylQeLQ",
+    gifts: [
+        {
+            platform: "BCA",
+            accountHolder: "Bima Mahendra",
+            accountNumber: "1234567890",
+            logo: "/images/landing/payments/BCA.png"
+        },
+        {
+            platform: "Dana",
+            accountHolder: "Anisa Putri",
+            accountNumber: "081234567890",
+            logo: "/images/landing/payments/Dana.png"
+        }
+    ]
 };
 
 // Ekspor tipe data agar bisa digunakan di komponen lain
