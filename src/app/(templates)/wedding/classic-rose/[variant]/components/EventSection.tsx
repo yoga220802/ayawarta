@@ -95,7 +95,7 @@ const EventCard: React.FC<{
 
 	return (
 		<div
-			className='relative w-full p-6 text-center bg-white/60 backdrop-blur-sm rounded-2xl'
+			className='relative w-full p-6 text-center bg-white/90 backdrop-blur-sm rounded-2xl'
 			style={{ color: "var(--color-text)" }}>
 			<div className='absolute -top-4 -left-4 w-28 h-28 md:w-44 md:h-44'>
 				<Image src={theme.assets.eventFrame} alt='Bingkai' fill />
@@ -158,7 +158,7 @@ const EventSection: React.FC<EventSectionProps> = ({
 			<CornerFlower flowerSrc={theme.assets.flower} position='bottom-right' />
 			<div className='relative z-20 container mx-auto px-4 sm:px-8 max-w-md flex flex-col items-center gap-10 py-20 md:py-32'>
 				<motion.div
-					className='px-8 py-2 rounded-lg bg-white/60 backdrop-blur-sm'
+					className='px-8 py-2 rounded-lg bg-white/90 backdrop-blur-sm'
 					initial={{ opacity: 0, y: -50 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}

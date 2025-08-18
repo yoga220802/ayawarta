@@ -145,7 +145,7 @@ const CoupleSection: React.FC<CoupleSectionProps> = ({ data, theme }) => {
 					<ProfileCard person={data.bride} align='right' theme={theme} />
 				</div>
 				<motion.div
-					className='mt-12 p-6 rounded-2xl bg-white/60 backdrop-blur-sm max-w-md'
+					className='mt-12 p-6 rounded-2xl bg-white/90 backdrop-blur-sm max-w-md'
 					initial={{ opacity: 0, y: 50 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}

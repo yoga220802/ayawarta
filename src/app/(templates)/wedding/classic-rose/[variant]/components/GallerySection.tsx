@@ -48,7 +48,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({
 				className='relative z-20 container mx-auto px-4 sm:px-8 max-w-md flex flex-col items-center gap-10 py-20 md:py-32'
 				style={{ color: "var(--color-text)" }}>
 				<motion.div
-					className='w-full p-4 text-center bg-white/60 backdrop-blur-sm rounded-2xl'
+					className='w-full p-4 text-center bg-white/90 backdrop-blur-sm rounded-2xl'
 					initial={{ opacity: 0, y: 50 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
@@ -108,7 +108,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({
 					</div>
 				</motion.div>
 				<motion.div
-					className='w-full p-6 text-center bg-white/60 backdrop-blur-sm rounded-2xl'
+					className='w-full p-6 text-center bg-white/90 backdrop-blur-sm rounded-2xl'
 					initial={{ opacity: 0, y: 50 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
