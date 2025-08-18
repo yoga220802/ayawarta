@@ -1,0 +1,21 @@
+/* src/app/templates/wedding/classic-rose/background.css */
+
+.seamless-background {
+    --bg-mobile: var(--bg-mobile-url, url('/path/to/default-bg.png'));
+    --bg-desktop: var(--bg-desktop-url, url('/path/to/default-bg-desktop.png'));
+
+    /* Terapkan background ke elemen ini */
+    background-image: var(--bg-mobile);
+    background-attachment: scroll;
+    /* Ikut scroll */
+    background-repeat: repeat-y;
+    background-size: 100% auto;
+    background-position: top center;
+}
+
+/* Ganti gambar untuk layar desktop */
+@media (min-width: 768px) {
+    .seamless-background {
+        background-image: var(--bg-desktop);
+    }
+}
