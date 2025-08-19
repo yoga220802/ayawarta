@@ -119,7 +119,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 			if (playerRef.current) {
 				playerRef.current.destroy();
 			}
-			window.onYouTubeIframeAPIReady = undefined as any;
+			window.onYouTubeIframeAPIReady = undefined;
 		};
 	}, [videoId, videoUrl]);
 
