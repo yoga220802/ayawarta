@@ -19,12 +19,15 @@ export default async function ClassicRosePage({
 }: {
 	params: { variant: string; slug?: string };
 }) {
+	// Pastikan params tidak diperlakukan sebagai Promise
+	const { variant, slug } = params;
+
 	// 1. Logika server: mengambil params dan mendapatkan konfigurasi tema.
-	const themeConfig = getClassicRoseThemeConfig(params.variant);
+	const themeConfig = getClassicRoseThemeConfig(variant);
 
 	// 2. Data bisa diambil dari database atau dummy-data.
-	const data = params.slug
-		? (await import("@/lib/invitations")).getInvitationBySlug(params.slug)?.data
+	const data = slug
+		? (await import("@/lib/invitations")).getInvitationBySlug(slug)?.data
 		: (await import("@/lib/dummy-data/wedding/dummy-wedding")).invitationData;
 
 	// Jika data tidak ditemukan, lempar error
@@ -35,7 +38,7 @@ export default async function ClassicRosePage({
 	// 3. Render Client Component dan kirim data sebagai props.
 	return (
 		<ClassicRoseClientView
-			invitationSlug={params.slug || "default"} // Tambahkan invitationSlug
+			invitationSlug={slug || "default"} // Tambahkan invitationSlug
 			themeConfig={themeConfig}
 			data={data}
 		/>
