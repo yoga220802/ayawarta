@@ -17,10 +17,10 @@ import ClassicRoseClientView from "./components/ClassicRoseClientView";
 export default async function ClassicRosePage({
 	params,
 }: {
-	params: { variant: string; slug?: string };
+	params: Promise<{ variant: string; slug?: string }>;
 }) {
-	// Pastikan params tidak diperlakukan sebagai Promise
-	const { variant, slug } = params;
+	// Tunggu params jika diperlukan
+	const { variant, slug } = await params;
 
 	// 1. Logika server: mengambil params dan mendapatkan konfigurasi tema.
 	const themeConfig = getClassicRoseThemeConfig(variant);
