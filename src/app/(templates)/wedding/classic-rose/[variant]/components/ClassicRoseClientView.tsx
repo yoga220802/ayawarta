@@ -58,6 +58,7 @@ function InvitationView({
 							guestName={guestName}
 							onOpen={handleOpenInvitation}
 							theme={themeConfig}
+							heroImage={data.couple.heroImage}
 						/>
 					</motion.div>
 				) : (

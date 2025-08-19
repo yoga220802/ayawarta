@@ -24,6 +24,7 @@ interface OpeningProps {
 	guestName?: string | null;
 	onOpen: () => void;
 	theme: ThemeConfig;
+	heroImage: string; // Tambahkan heroImage sebagai properti
 }
 
 const OpeningSection: React.FC<OpeningProps> = ({
@@ -31,6 +32,7 @@ const OpeningSection: React.FC<OpeningProps> = ({
 	guestName,
 	onOpen,
 	theme,
+	heroImage, // Ambil heroImage dari props
 }) => {
 	return (
 		<div
@@ -59,7 +61,7 @@ const OpeningSection: React.FC<OpeningProps> = ({
 					<div className='absolute inset-0 p-[14.8%]'>
 						<div className='relative w-full h-full rounded-full overflow-hidden'>
 							<Image
-								src='/images/dummy-couples/hero.png'
+								src={heroImage} // Gunakan heroImage dari props
 								alt='Foto Pasangan'
 								fill
 								className='object-cover'
