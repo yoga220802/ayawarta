@@ -117,10 +117,12 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 		}
 
 		return () => {
-			playerRef.current?.destroy();
+			if (playerRef.current) {
+				playerRef.current.destroy(); // Pastikan ini adalah pernyataan yang valid
+			}
 			window.onYouTubeIframeAPIReady = undefined;
 		};
-	}, [videoId, videoUrl]);
+	}, [videoId, videoUrl]); // Tambahkan videoUrl sebagai dependensi
 
 	const toggleMusic = () => {
 		if (!playerRef.current) return;

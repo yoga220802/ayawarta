@@ -1,6 +1,6 @@
 // src/components/templates/classic-rose/EventSection.tsx
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ClassicRoseThemeConfig as ThemeConfig } from "@/lib/theme-config/classic-rose";
@@ -71,7 +71,7 @@ const parseEventDateTime = (dateStr: string, timeStr: string): Date => {
 
 // --- Sub-Components ---
 const CountdownTimer: React.FC<{ targetDate: Date }> = ({ targetDate }) => {
-	const calculateTimeLeft = () => {
+	const calculateTimeLeft = useCallback(() => {
 		const difference = +targetDate - +new Date();
 		let timeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
 
@@ -84,14 +84,14 @@ const CountdownTimer: React.FC<{ targetDate: Date }> = ({ targetDate }) => {
 			};
 		}
 		return timeLeft;
-	};
+	}, [targetDate]); // Tambahkan targetDate sebagai dependensi
 
 	const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
 	useEffect(() => {
 		const timer = setInterval(() => setTimeLeft(calculateTimeLeft()), 1000);
 		return () => clearInterval(timer);
-	}, [calculateTimeLeft]); // Tambahkan calculateTimeLeft ke array dependensi
+	}, [calculateTimeLeft]); // Gunakan calculateTimeLeft sebagai dependensi
 
 	const timeUnits = [
 		{ label: "Hari", value: timeLeft.days },
