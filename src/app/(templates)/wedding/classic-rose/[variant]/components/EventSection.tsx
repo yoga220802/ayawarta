@@ -91,7 +91,7 @@ const CountdownTimer: React.FC<{ targetDate: Date }> = ({ targetDate }) => {
 	useEffect(() => {
 		const timer = setInterval(() => setTimeLeft(calculateTimeLeft()), 1000);
 		return () => clearInterval(timer);
-	}, [targetDate]);
+	}, [calculateTimeLeft]); // Tambahkan calculateTimeLeft ke array dependensi
 
 	const timeUnits = [
 		{ label: "Hari", value: timeLeft.days },

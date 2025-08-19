@@ -74,7 +74,7 @@ const getYoutubeVideoId = (url: string): string | null => {
 	return match && match[2].length === 11 ? match[2] : null;
 };
 
-const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl, theme }) => {
+const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 	const [isPlaying, setIsPlaying] = useState(true);
 	const playerRef = useRef<YTPlayerInstance | null>(null);
 	const videoId = getYoutubeVideoId(videoUrl);
@@ -120,7 +120,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl, theme }) => {
 			playerRef.current?.destroy();
 			window.onYouTubeIframeAPIReady = undefined;
 		};
-	}, [videoId]);
+	}, [videoId, videoUrl]);
 
 	const toggleMusic = () => {
 		if (!playerRef.current) return;

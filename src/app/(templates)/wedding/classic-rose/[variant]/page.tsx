@@ -6,7 +6,6 @@ import React from "react";
 import "../background.css";
 
 import { getClassicRoseThemeConfig } from "@/lib/theme-config/classic-rose";
-import { invitationData } from "@/lib/dummy-data/wedding/dummy-wedding";
 import ClassicRoseClientView from "./components/ClassicRoseClientView";
 
 // Impor komponen baru yang sudah ditandai "use client"

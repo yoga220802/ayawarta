@@ -1,6 +1,5 @@
 // src/app/[slug]/page.tsx
 import React from "react";
-import { notFound } from "next/navigation";
 
 import { getInvitationBySlug } from "@/lib/invitations";
 import { getClassicRoseThemeConfig } from "@/lib/theme-config/classic-rose";
