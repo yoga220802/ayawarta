@@ -17,9 +17,9 @@ import ClassicRoseClientView from "../(templates)/wedding/classic-rose/[variant]
 export default async function InvitationPage({
 	params,
 }: {
-	params: { slug: string };
+	params: Promise<{ slug: string }>;
 }) {
-	// Tunggu params untuk memastikan slug tersedia
+	// Tunggu params jika diperlukan
 	const { slug } = await params;
 
 	// 1. Ambil data undangan berdasarkan slug
