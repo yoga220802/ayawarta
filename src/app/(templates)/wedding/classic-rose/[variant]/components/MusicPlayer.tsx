@@ -120,7 +120,8 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 			if (playerRef.current) {
 				playerRef.current.destroy(); // Pastikan ini adalah pernyataan yang valid
 			}
-			delete window.onYouTubeIframeAPIReady;
+			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+			window.onYouTubeIframeAPIReady = undefined;
 		};
 	}, [videoId, videoUrl]); // Tambahkan videoUrl sebagai dependensi
 
