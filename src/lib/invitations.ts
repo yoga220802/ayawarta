@@ -87,7 +87,7 @@ const sampleInvitations: Record<string, Invitation> = {
                 {
                     platform: "Permata Bank",
                     accountHolder: "Moch Fauzi Febriana",
-                    accountNumber: "083824827362",
+                    accountNumber: "9999947317",
                     logo: "/images/landing/payments/Permata.png"
                 },
                 {
