@@ -1,4 +1,3 @@
-// src/components/templates/classic-rose/MusicPlayer.tsx
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -26,7 +25,7 @@ declare global {
 				options: Record<string, unknown>
 			) => YTPlayerInstance;
 		};
-		onYouTubeIframeAPIReady?: () => void;
+		onYouTubeIframeAPIReady?: () => void | null;
 	}
 }
 
@@ -64,7 +63,7 @@ const VolumeOffIcon = ({ className }: { className?: string }) => (
 // --- Component Props ---
 interface MusicPlayerProps {
 	videoUrl: string;
-	theme: ThemeConfig; // Terima props theme
+	theme: ThemeConfig;
 }
 
 const getYoutubeVideoId = (url: string): string | null => {
@@ -118,12 +117,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 
 		return () => {
 			if (playerRef.current) {
-				playerRef.current.destroy(); // Pastikan ini adalah pernyataan yang valid
+				playerRef.current.destroy();
 			}
-			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-			window.onYouTubeIframeAPIReady = undefined;
+			window.onYouTubeIframeAPIReady = undefined as any;
 		};
-	}, [videoId, videoUrl]); // Tambahkan videoUrl sebagai dependensi
+	}, [videoId, videoUrl]);
 
 	const toggleMusic = () => {
 		if (!playerRef.current) return;
@@ -136,7 +134,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 			<div id='youtube-player' className='absolute -top-96'></div>
 			<motion.button
 				onClick={toggleMusic}
-				style={{ backgroundColor: "var(--color-primary)" }} // Gunakan variabel CSS dari theme
+				style={{ backgroundColor: "var(--color-primary)" }}
 				className='fixed bottom-5 right-5 z-50 w-12 h-12 text-white rounded-full flex items-center justify-center shadow-lg'
 				initial={{ scale: 0, rotate: -180 }}
 				animate={{ scale: 1, rotate: 0 }}
