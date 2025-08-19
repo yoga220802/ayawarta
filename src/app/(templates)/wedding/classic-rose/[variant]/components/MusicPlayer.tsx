@@ -1,3 +1,4 @@
+// src/components/templates/classic-rose/MusicPlayer.tsx
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -25,7 +26,7 @@ declare global {
 				options: Record<string, unknown>
 			) => YTPlayerInstance;
 		};
-		onYouTubeIframeAPIReady?: () => void | null;
+		onYouTubeIframeAPIReady?: (() => void) | undefined;
 	}
 }
 
