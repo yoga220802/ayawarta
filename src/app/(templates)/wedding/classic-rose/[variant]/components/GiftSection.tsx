@@ -28,12 +28,13 @@ const TitleDivider: React.FC<{ src: string }> = ({ src }) => (
 );
 
 interface GiftSectionProps {
-	gifts: InvitationData["gifts"];
+	gifts?: InvitationData["gifts"]; // made optional
 	theme: ThemeConfig;
 }
 
 const GiftSection: React.FC<GiftSectionProps> = ({ gifts, theme }) => {
 	const [copiedAccount, setCopiedAccount] = useState<string | null>(null);
+	const giftList = gifts ?? []; // safe fallback
 
 	const handleCopy = (accountNumber: string) => {
 		// Trik untuk menyalin teks ke clipboard
@@ -80,7 +81,7 @@ const GiftSection: React.FC<GiftSectionProps> = ({ gifts, theme }) => {
 				</motion.div>
 
 				<div className='w-full space-y-4'>
-					{gifts.map((gift, index) => (
+					{giftList.map((gift, index) => (
 						<motion.div
 							key={index}
 							className='bg-white/90 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center'
