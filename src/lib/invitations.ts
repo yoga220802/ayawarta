@@ -4,14 +4,14 @@ import { invitationData as defaultInvitationData } from "@/lib/dummy-data/weddin
 
 // Tipe data untuk metadata undangan
 interface InvitationMeta {
-    theme: 'classic-rose'; // Untuk sekarang hanya classic-rose
+    theme: 'classic-rose';
     variant: 'red' | 'green' | 'blue' | 'orange' | 'black' | 'white';
 }
 
 // Tipe data lengkap untuk satu undangan
 interface Invitation {
     meta: InvitationMeta;
-    data: InvitationDataType; // Menggunakan tipe data dari dummy-data agar strukturnya konsisten
+    data: InvitationDataType;
 }
 
 // Database simulasi kita, menggunakan slug sebagai kunci
@@ -21,8 +21,15 @@ const sampleInvitations: Record<string, Invitation> = {
             theme: 'classic-rose',
             variant: 'black',
         },
-        // Data ini 100% baru dan tidak menggunakan ...defaultData
         data: {
+            sections: {
+                couple: true,
+                events: true,
+                gallery: true,
+                loveStory: true,
+                gifts: true,
+                wishes: true,
+            },
             couple: {
                 groom: {
                     name: "Moch Fauzi Febriana",
@@ -68,6 +75,7 @@ const sampleInvitations: Record<string, Invitation> = {
                     "/images/SAMPLE/FOTO - Couple.jpg",
                 ],
             },
+            // DIKOREKSI: Datanya ditambahkan kembali
             loveStory: [
                 {
                     title: "Cerita Awal Pertemuan",
@@ -97,6 +105,60 @@ const sampleInvitations: Record<string, Invitation> = {
                     logo: "/images/landing/payments/Dana.png"
                 }
             ]
+        }
+    },
+    "shidqi-mita": {
+        meta: {
+            theme: 'classic-rose',
+            variant: 'black',
+        },
+        data: {
+            sections: {
+                couple: true,
+                events: true,
+                gallery: true,
+                loveStory: false, // dinonaktifkan
+                gifts: false,     // dinonaktifkan
+                wishes: true,
+            },
+            couple: {
+                groom: {
+                    name: "Shidqi Nurpermadi",
+                    parents: "Putra Pertama dari Bapak Uned Junaedi & Ibu Yuyun",
+                    instagram: "",
+                    photo: "https://res.cloudinary.com/doig3gwek/image/upload/v1758636624/PWD_Shidqi_im7frp.jpg",
+                },
+                bride: {
+                    name: "Mita Ali Tifta",
+                    parents: "Putri Pertama dari Bapak Edih Maskun(alm) & Ibu Elis Alis Yuismi",
+                    instagram: "",
+                    photo: "https://res.cloudinary.com/doig3gwek/image/upload/v1758636621/PWD_Mita_xeonoq.jpg",
+                },
+                heroImage: "https://res.cloudinary.com/doig3gwek/image/upload/v1758633531/couple_pqya73.jpg",
+            },
+            weddingDate: new Date("2025-12-10T09:00:00"),
+            events: [
+                {
+                    name: "Akad Nikah & Resepsi",
+                    date: "10 Desember 2025",
+                    time: "09:30 WIB - Selesai",
+                    location: "Rumah",
+                    address: "Kp.Cisaronggge RT 02/ RW 11 Desa Mekarmukti, Kec Cihampelas Kab.Bandung Barat",
+                    mapLink: "https://maps.app.goo.gl/EGwptvewrEttd9R86",
+                }
+            ],
+            gallery: {
+                videoUrl: "",
+                images: [
+                    "https://res.cloudinary.com/doig3gwek/image/upload/v1758633550/PWD_Mita_Shidqi-11_-_Shidqi_Nurpermadi_m4edz9.jpg",
+                    "https://res.cloudinary.com/doig3gwek/image/upload/v1758633577/PWD_Mita_Shidqi-15_-_Shidqi_Nurpermadi_yslkig.jpg",
+                    "https://res.cloudinary.com/doig3gwek/image/upload/v1758633550/PWD_Mita_Shidqi-6_-_Shidqi_Nurpermadi_hfa8yt.jpg",
+                    "https://res.cloudinary.com/doig3gwek/image/upload/v1758633592/PWD_Mita_Shidqi-26_-_Shidqi_Nurpermadi_txf0mo.jpg",
+                    "https://res.cloudinary.com/doig3gwek/image/upload/v1758633588/PWD_Mita_Shidqi-19_-_Shidqi_Nurpermadi_cxl1ba.jpg",
+                    "https://res.cloudinary.com/doig3gwek/image/upload/v1758633549/PWD_Mita_Shidqi-5_-_Shidqi_Nurpermadi_znxxvw.jpg",
+                ],
+            },
+            musicUrl: "https://youtu.be/JHyhUWcFhWY?si=Qpr144vcUe_Kmopc",
         }
     }
 };
