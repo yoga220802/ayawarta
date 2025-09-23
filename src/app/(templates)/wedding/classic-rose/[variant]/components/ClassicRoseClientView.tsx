@@ -1,4 +1,4 @@
-// src/components/templates/classic-rose/ClassicRoseClientView.tsx
+// src/app/(templates)/wedding/classic-rose/[variant]/components/ClassicRoseClientView.tsx
 "use client";
 
 import React, { useState, Suspense } from "react";
@@ -6,16 +6,17 @@ import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { ClassicRoseThemeConfig } from "@/lib/theme-config/classic-rose";
+import { InvitationData } from "@/lib/dummy-data/wedding/dummy-wedding";
 
 import OpeningSection from "./OpeningSection";
 import HeroSection from "./HeroSection";
 import CoupleSection from "./CoupleSection";
 import EventSection from "./EventSection";
 import GallerySection from "./GallerySection";
+import LoveStorySection from "./LoveStorySection"; // Impor komponen baru
 import GiftSection from "./GiftSection";
 import WishesSection from "./WishesSection";
 import MusicPlayer from "./MusicPlayer";
-import { InvitationData } from "@/lib/dummy-data/wedding/dummy-wedding";
 
 function InvitationView({
 	invitationSlug,
@@ -45,6 +46,15 @@ function InvitationView({
 		"--bg-desktop-url": `url(${themeConfig.assets.backgroundDesktop})`,
 	} as React.CSSProperties;
 
+	const sections = data.sections || {
+		couple: true,
+		events: true,
+		gallery: true,
+		loveStory: true,
+		gifts: true,
+		wishes: true,
+	};
+
 	return (
 		<div style={themeStyle} className='font-[--font-body]'>
 			<AnimatePresence>
@@ -68,20 +78,37 @@ function InvitationView({
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							transition={{ duration: 0.8 }}>
-							<MusicPlayer videoUrl={data.musicUrl} theme={themeConfig} />
+							{data.musicUrl && (
+								<MusicPlayer videoUrl={data.musicUrl} theme={themeConfig} />
+							)}
+
 							<HeroSection data={data.couple} theme={themeConfig} />
-							<CoupleSection data={data.couple} theme={themeConfig} />
-							<EventSection
-								events={data.events}
-								theme={themeConfig}
-							/>
-							<GallerySection
-								gallery={data.gallery}
-								loveStory={data.loveStory}
-								theme={themeConfig}
-							/>
-							<GiftSection gifts={data.gifts} theme={themeConfig} />
-							<WishesSection invitationSlug={invitationSlug} theme={themeConfig} />
+
+							{sections.couple && (
+								<CoupleSection data={data.couple} theme={themeConfig} />
+							)}
+
+							{sections.events && (
+								<EventSection events={data.events} theme={themeConfig} />
+							)}
+
+							{/* --- LOGIKA RENDERING DIPERBAIKI --- */}
+							{/* Sekarang mereka dipanggil terpisah */}
+							{sections.gallery && data.gallery && (
+								<GallerySection gallery={data.gallery} theme={themeConfig} />
+							)}
+
+							{sections.loveStory && data.loveStory && (
+								<LoveStorySection loveStory={data.loveStory} theme={themeConfig} />
+							)}
+
+							{sections.gifts && data.gifts && (
+								<GiftSection gifts={data.gifts} theme={themeConfig} />
+							)}
+
+							{sections.wishes && (
+								<WishesSection invitationSlug={invitationSlug} theme={themeConfig} />
+							)}
 						</motion.div>
 					</main>
 				)}

@@ -1,3 +1,5 @@
+// src/lib/dummy-data/wedding/dummy-wedding.ts
+
 // Data dummy terpusat untuk undangan. Nantinya, ini bisa diganti
 // dengan data yang diambil dari database atau API.
 export const invitationData = {
@@ -79,8 +81,26 @@ export const invitationData = {
             accountNumber: "081234567890",
             logo: "/images/landing/payments/Dana.png"
         }
-    ]
+    ],
+    // --- TAMBAHAN BARU ---
+    // Konfigurasi untuk menampilkan/menyembunyikan section
+    sections: {
+        couple: true,
+        events: true,
+        gallery: true,
+        loveStory: true,
+        gifts: true,
+        wishes: true,
+    }
 };
 
-// Ekspor tipe data agar bisa digunakan di komponen lain
-export type InvitationData = typeof invitationData;
+// --- MODIFIKASI TIPE DATA ---
+// Kita buat beberapa properti menjadi opsional (?) karena bisa jadi tidak ada jika section-nya di-disable.
+// 'couple' dan 'events' kita anggap wajib ada.
+type BaseInvitationData = typeof invitationData;
+export interface InvitationData extends Omit<BaseInvitationData, 'gallery' | 'loveStory' | 'gifts' | 'musicUrl'> {
+    gallery?: BaseInvitationData['gallery'];
+    loveStory?: BaseInvitationData['loveStory'];
+    gifts?: BaseInvitationData['gifts'];
+    musicUrl?: BaseInvitationData['musicUrl'];
+}

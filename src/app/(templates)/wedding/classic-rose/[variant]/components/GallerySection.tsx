@@ -23,26 +23,20 @@ const TitleDivider: React.FC<{ src: string }> = ({ src }) => (
 	</div>
 );
 
+// Props sekarang hanya butuh 'gallery'
 interface GallerySectionProps {
-	gallery: InvitationData["gallery"];
-	loveStory: InvitationData["loveStory"];
+	gallery: NonNullable<InvitationData["gallery"]>;
 	theme: ThemeConfig;
 }
 
-const GallerySection: React.FC<GallerySectionProps> = ({
-	gallery,
-	loveStory,
-	theme,
-}) => {
+const GallerySection: React.FC<GallerySectionProps> = ({ gallery, theme }) => {
 	const [playVideo, setPlayVideo] = useState(false);
 
-	// Fungsi untuk mendapatkan embed URL YouTube
 	const getEmbedUrl = (url: string) => {
 		const videoId = url.split("v=")[1]?.split("&")[0];
 		return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1` : "";
 	};
 
-	// Periksa apakah URL video valid
 	const isVideoValid = gallery.videoUrl && getEmbedUrl(gallery.videoUrl) !== "";
 
 	return (
@@ -115,38 +109,6 @@ const GallerySection: React.FC<GallerySectionProps> = ({
 									fill
 									className='object-cover'
 								/>
-							</div>
-						))}
-					</div>
-				</motion.div>
-				<motion.div
-					className='w-full p-6 text-center bg-white/90 backdrop-blur-sm rounded-2xl'
-					initial={{ opacity: 0, y: 50 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.8, delay: 0.2 }}>
-					<div className='flex items-center justify-center gap-4'>
-						<TitleDivider src={theme.assets.divider} />
-						<h2 className='text-xl' style={{ fontFamily: "var(--font-body)" }}>
-							Kisah Kami
-						</h2>
-						<div className='transform -scale-x-100'>
-							<TitleDivider src={theme.assets.divider} />
-						</div>
-					</div>
-					<div className='mt-6 space-y-6'>
-						{loveStory.map((story) => (
-							<div key={story.title}>
-								<h3
-									className='text-lg font-semibold'
-									style={{ fontFamily: "var(--font-heading)" }}>
-									{story.title}
-								</h3>
-								<p
-									className='text-sm text-justify mt-2'
-									style={{ fontFamily: "var(--font-body)" }}>
-									{story.content}
-								</p>
 							</div>
 						))}
 					</div>
