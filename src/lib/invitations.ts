@@ -178,7 +178,7 @@ export function getDefaultInvitation(): Invitation {
     return {
         meta: {
             theme: "classic-rose",
-            variant: "red", // Default variant
+            variant: "red",
         },
         data: defaultInvitationData,
     };
