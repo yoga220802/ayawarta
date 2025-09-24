@@ -136,11 +136,11 @@ const sampleInvitations: Record<string, Invitation> = {
                 },
                 heroImage: "https://res.cloudinary.com/doig3gwek/image/upload/v1758683815/couple_mnq0zf.jpg",
             },
-            weddingDate: new Date("2025-12-10T09:00:00"),
+            weddingDate: new Date("2025-10-12T09:00:00"),
             events: [
                 {
                     name: "Akad Nikah & Resepsi",
-                    date: "10 Desember 2025",
+                    date: "12 Oktober 2025",
                     time: "09:30 WIB - Selesai",
                     location: "Rumah",
                     address: "Kp.Cisaronggge RT 02/ RW 11 Desa Mekarmukti, Kec Cihampelas Kab.Bandung Barat",
