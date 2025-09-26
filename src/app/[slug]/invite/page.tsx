@@ -127,7 +127,7 @@ Wedding E-Invitation ini merupakan undangan resmi dari kami, kami mohon maaf men
 					) : !invitationData ? (
 						<div className='text-center text-red-500'>
 							<h1 className='text-xl font-bold'>Gagal Memuat Data</h1>
-							<p>Data untuk undangan '{slug}' tidak ditemukan.</p>
+							<p>Data untuk undangan &apos;{slug}&apos; tidak ditemukan.</p>
 						</div>
 					) : (
 						<>
