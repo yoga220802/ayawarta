@@ -160,6 +160,73 @@ const sampleInvitations: Record<string, Invitation> = {
             },
             musicUrl: "https://youtu.be/JHyhUWcFhWY?si=Qpr144vcUe_Kmopc",
         }
+    },
+    "dudi-aini": {
+        meta: {
+            theme: 'classic-rose',
+            variant: 'white',
+        },
+        data: {
+            sections: {
+                couple: true,
+                events: true,
+                gallery: true,
+                loveStory: false,
+                gifts: true,
+                wishes: true,
+            },
+            couple: {
+                groom: {
+                    name: "Dudi",
+                    parents: "Putra Keenam dari Bapak Irin & Ibu Engkom",
+                    instagram: "",
+                    photo: "https://res.cloudinary.com/doig3gwek/image/upload/v1763485132/dudi_aiwaeh.jpg",
+                },
+                bride: {
+                    name: "Aini Sri Lutami",
+                    parents: "Putri Pertama dari Bapak Toni & Ibu Ai Susanti",
+                    instagram: "",
+                    photo: "https://res.cloudinary.com/doig3gwek/image/upload/v1763485132/aini_ru5pui.jpg",
+                },
+                heroImage: "https://res.cloudinary.com/doig3gwek/image/upload/v1763484805/heroImage_blhgl5.jpg",
+            },
+            weddingDate: new Date("2025-12-21T08:00:00"),
+            events: [
+                {
+                    name: "Akad Nikah",
+                    date: "21 Desember 2025",
+                    time: "08:00 WIB - Selesai",
+                    location: "",
+                    address: "Jalan Terusan Pembangunan Kp. Pataruman RT01/RW02",
+                    mapLink: "",
+                },
+                {
+                    name: "Resepsi",
+                    date: "21 Desember 2025",
+                    time: "08:00 WIB - Selesai",
+                    location: "",
+                    address: "Jalan Terusan Pembangunan Kp. Pataruman RT01/RW02",
+                    mapLink: "",
+                },
+            ],
+            gifts: [
+                {
+                    platform: "Dana",
+                    accountHolder: "Aini Sri Lutami",
+                    accountNumber: "1483146063",
+                    logo: "/images/landing/payments/Dana.png"
+                }
+            ],
+            gallery: {
+                videoUrl: "",
+                images: [
+                    "https://res.cloudinary.com/doig3gwek/image/upload/v1763484805/heroImage_blhgl5.jpg",
+                    "https://res.cloudinary.com/doig3gwek/image/upload/v1763484805/2_ladbgf.jpg",
+                    "https://res.cloudinary.com/doig3gwek/image/upload/v1763484804/1_zwbtks.jpg",
+                ],
+            },
+            musicUrl: "https://youtu.be/JHyhUWcFhWY?si=Qpr144vcUe_Kmopc"
+        }
     }
 };
 
