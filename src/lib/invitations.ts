@@ -193,20 +193,12 @@ const sampleInvitations: Record<string, Invitation> = {
             weddingDate: new Date("2025-12-21T08:00:00"),
             events: [
                 {
-                    name: "Akad Nikah",
+                    name: "Akad Nikah & Resepsi",
                     date: "21 Desember 2025",
                     time: "08:00 WIB - Selesai",
                     location: "",
                     address: "Jalan Terusan Pembangunan Kp. Pataruman RT01/RW02",
-                    mapLink: "",
-                },
-                {
-                    name: "Resepsi",
-                    date: "21 Desember 2025",
-                    time: "08:00 WIB - Selesai",
-                    location: "",
-                    address: "Jalan Terusan Pembangunan Kp. Pataruman RT01/RW02",
-                    mapLink: "",
+                    mapLink: "https://maps.app.goo.gl/fo3g2CrAj7b4Z5r4A",
                 },
             ],
             gifts: [
@@ -225,11 +217,10 @@ const sampleInvitations: Record<string, Invitation> = {
                     "https://res.cloudinary.com/doig3gwek/image/upload/v1763484804/1_zwbtks.jpg",
                 ],
             },
-            musicUrl: "https://youtu.be/JHyhUWcFhWY?si=Qpr144vcUe_Kmopc"
+            musicUrl: "https://youtu.be/GAf2DQPYvGE?si=JemtvfvApS7Dmt_t"
         }
     }
 };
-
 /**
  * Fungsi untuk mengambil data undangan berdasarkan slug.
  * Ini mensimulasikan panggilan ke database/backend.
