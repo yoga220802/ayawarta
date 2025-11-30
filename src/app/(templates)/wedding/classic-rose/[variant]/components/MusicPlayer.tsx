@@ -16,6 +16,7 @@ interface YTPlayerInstance {
 
 interface YTEvent {
 	target: YTPlayerInstance;
+	data?: number;
 }
 
 declare global {
@@ -74,65 +75,165 @@ const getYoutubeVideoId = (url: string): string | null => {
 	return match && match[2].length === 11 ? match[2] : null;
 };
 
+// Tambah helper untuk deteksi audio langsung
+const isDirectAudioUrl = (url: string): boolean => {
+	return /\.(mp3|wav|mpeg)(\?.*)?$/i.test(url);
+};
+
 const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoUrl }) => {
 	const [isPlaying, setIsPlaying] = useState(true);
 	const playerRef = useRef<YTPlayerInstance | null>(null);
+	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const videoId = getYoutubeVideoId(videoUrl);
 
+	const autoplayBlockedRef = useRef(false);
+	const ytStartedRef = useRef(false);
+
 	useEffect(() => {
-		if (!videoId) {
-			console.error("Invalid YouTube URL provided:", videoUrl);
-			return;
+		const isYouTube = !!videoId;
+		const isAudio = isDirectAudioUrl(videoUrl);
+
+		// Cleanup lama sebelum setup baru
+		if (playerRef.current) {
+			playerRef.current.destroy();
+			playerRef.current = null;
 		}
+		if (audioRef.current) {
+			audioRef.current.pause();
+			audioRef.current.removeAttribute("src");
+			audioRef.current.load();
+		}
+		if (window.onYouTubeIframeAPIReady) {
+			window.onYouTubeIframeAPIReady = undefined;
+		}
+		autoplayBlockedRef.current = false;
+		ytStartedRef.current = false;
 
-		const setupPlayer = () => {
-			if (window.YT && window.YT.Player) {
-				playerRef.current = new window.YT.Player("youtube-player", {
-					height: "0",
-					width: "0",
-					videoId: videoId,
-					playerVars: {
-						autoplay: 1,
-						loop: 1,
-						playlist: videoId,
-					},
-					events: {
-						onReady: (event: YTEvent) => {
-							event.target.playVideo();
-							event.target.setVolume(50);
+		if (isYouTube) {
+			const setupPlayer = () => {
+				if (window.YT && window.YT.Player) {
+					playerRef.current = new window.YT.Player("youtube-player", {
+						height: "0",
+						width: "0",
+						videoId: videoId!,
+						playerVars: {
+							autoplay: 1,
+							loop: 1,
+							playlist: videoId!,
 						},
-					},
-				});
-			}
-		};
+						events: {
+							onReady: (event: YTEvent) => {
+								event.target.unMute();
+								event.target.setVolume(50);
+								event.target.playVideo();
+							},
+							onStateChange: (e: YTEvent) => {
+								if (e.data === 1) {
+									ytStartedRef.current = true;
+								}
+							},
+						},
+					});
+				}
+			};
 
-		if (!window.YT) {
-			window.onYouTubeIframeAPIReady = setupPlayer;
-			const tag = document.createElement("script");
-			tag.src = "https://www.youtube.com/iframe_api";
-			const firstScriptTag = document.getElementsByTagName("script")[0];
-			firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+			if (!window.YT) {
+				window.onYouTubeIframeAPIReady = setupPlayer;
+				const tag = document.createElement("script");
+				tag.src = "https://www.youtube.com/iframe_api";
+				const firstScriptTag = document.getElementsByTagName("script")[0];
+				firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+			} else {
+				setupPlayer();
+			}
+		} else if (isAudio) {
+			if (audioRef.current) {
+				audioRef.current.src = videoUrl;
+				audioRef.current.loop = true;
+				audioRef.current.volume = 0.5;
+				audioRef.current.muted = false;
+				audioRef.current
+					.play()
+					.catch(() => {
+						autoplayBlockedRef.current = true;
+					});
+			}
 		} else {
-			setupPlayer();
+			console.error("Unsupported media URL provided:", videoUrl);
 		}
 
 		return () => {
 			if (playerRef.current) {
 				playerRef.current.destroy();
+				playerRef.current = null;
+			}
+			if (audioRef.current) {
+				audioRef.current.pause();
+				audioRef.current.removeAttribute("src");
+				audioRef.current.load();
 			}
 			window.onYouTubeIframeAPIReady = undefined;
+			autoplayBlockedRef.current = false;
+			ytStartedRef.current = false;
 		};
 	}, [videoId, videoUrl]);
 
 	const toggleMusic = () => {
-		if (!playerRef.current) return;
-		isPlaying ? playerRef.current.mute() : playerRef.current.unMute();
-		setIsPlaying(!isPlaying);
+		const isYouTube = !!videoId;
+		const isAudio = isDirectAudioUrl(videoUrl);
+
+		if (isAudio && audioRef.current) {
+			const audio = audioRef.current;
+
+			if (audio.paused || autoplayBlockedRef.current) {
+				audio.muted = false;
+				audio.play().catch(() => {});
+				autoplayBlockedRef.current = false;
+				setIsPlaying(true);
+				return;
+			}
+
+			if (isPlaying) {
+				audio.muted = true;
+				setIsPlaying(false);
+			} else {
+				audio.muted = false;
+				if (audio.paused) {
+					audio.play().catch(() => {});
+				}
+				setIsPlaying(true);
+			}
+			return;
+		}
+
+		if (isYouTube && playerRef.current) {
+			if (!ytStartedRef.current) {
+				playerRef.current.unMute();
+				playerRef.current.playVideo();
+				ytStartedRef.current = true;
+				setIsPlaying(true);
+				return;
+			}
+
+			if (isPlaying) {
+				playerRef.current.mute();
+				setIsPlaying(false);
+			} else {
+				playerRef.current.unMute();
+				playerRef.current.playVideo();
+				setIsPlaying(true);
+			}
+		}
 	};
 
 	return (
 		<>
+			{/* Target untuk YT Iframe */}
 			<div id='youtube-player' className='absolute -top-96'></div>
+
+			{/* Audio element untuk sumber audio langsung */}
+			<audio ref={audioRef} className='hidden' preload='auto' />
+
 			<motion.button
 				onClick={toggleMusic}
 				style={{ backgroundColor: "var(--color-primary)" }}
