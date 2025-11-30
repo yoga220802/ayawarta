@@ -214,10 +214,10 @@ const sampleInvitations: Record<string, Invitation> = {
                 images: [
                     "https://res.cloudinary.com/doig3gwek/image/upload/v1763484805/heroImage_blhgl5.jpg",
                     "https://res.cloudinary.com/doig3gwek/image/upload/v1763484805/2_ladbgf.jpg",
-                    "https://res.cloudinary.com/doig3gwek/image/upload/v1763484804/1_zwbtks.jpg",
+                    "https://res.cloudinary.com/doig3gwek/image/upload/v1764531674/foto_3_xqac20.jpg",
                 ],
             },
-            musicUrl: "https://youtu.be/GAf2DQPYvGE?si=JemtvfvApS7Dmt_t"
+            musicUrl: "https://res.cloudinary.com/doig3gwek/video/upload/v1764532212/lagu_ruirls.mp3"
         }
     }
 };
