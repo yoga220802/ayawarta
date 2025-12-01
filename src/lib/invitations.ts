@@ -198,7 +198,7 @@ const sampleInvitations: Record<string, Invitation> = {
                     time: "08:00 WIB - Selesai",
                     location: "",
                     address: "Jalan Terusan Pembangunan Kp. Pataruman RT01/RW02",
-                    mapLink: "https://maps.app.goo.gl/fo3g2CrAj7b4Z5r4A",
+                    mapLink: "https://maps.app.goo.gl/AvTiCA2WCmsiKU4A9",
                 },
             ],
             gifts: [
