@@ -214,7 +214,7 @@ const sampleInvitations: Record<string, Invitation> = {
                 images: [
                     "https://res.cloudinary.com/doig3gwek/image/upload/v1763484805/heroImage_blhgl5.jpg",
                     "https://res.cloudinary.com/doig3gwek/image/upload/v1763484805/2_ladbgf.jpg",
-                    "https://res.cloudinary.com/doig3gwek/image/upload/v1764531674/foto_3_xqac20.jpg",
+                    "https://res.cloudinary.com/doig3gwek/image/upload/v1764585361/foto_4_w4msfb.jpg",
                 ],
             },
             musicUrl: "https://res.cloudinary.com/doig3gwek/video/upload/v1764532212/lagu_ruirls.mp3"
