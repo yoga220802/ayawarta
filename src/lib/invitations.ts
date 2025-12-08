@@ -188,7 +188,7 @@ const sampleInvitations: Record<string, Invitation> = {
                     instagram: "",
                     photo: "https://res.cloudinary.com/doig3gwek/image/upload/v1763485132/aini_ru5pui.jpg",
                 },
-                heroImage: "https://res.cloudinary.com/doig3gwek/image/upload/v1763484805/heroImage_blhgl5.jpg",
+                heroImage: "https://res.cloudinary.com/doig3gwek/image/upload/v1765164240/hero_byywfn.jpg",
             },
             weddingDate: new Date("2025-12-21T08:00:00"),
             events: [
