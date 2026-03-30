@@ -59,11 +59,11 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative w-full overflow-hidden bg-[#F3F6FD] pt-8 pb-0 lg:pt-10"
+      className="relative w-screen left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] overflow-hidden bg-[#F3F6FD] pt-8 pb-0 lg:pt-10"
     >
       <div className="relative min-h-[calc(100vh-80px)] flex flex-col">
         {/* Content Container */}
-        <div className="flex flex-1 flex-col lg:flex-row items-stretch overflow-hidden">
+        <div className="flex flex-1 flex-col lg:flex-row items-stretch overflow-visible">
           {/* Left Content */}
           <div className="relative z-10 w-full lg:w-1/2 px-4 sm:px-8 lg:px-16 flex flex-col justify-center py-8 lg:py-10">
             <motion.div
@@ -125,12 +125,12 @@ const HeroSection = () => {
 
           {/* Right Content - Phone and Avatars */}
           <motion.div
-            className="relative w-full lg:w-1/2 flex flex-col items-stretch justify-center py-8 lg:py-0 lg:-mr-16 lg:pr-0"
+            className="hidden lg:flex relative w-screen lg:w-auto flex-col items-stretch justify-center py-8 lg:py-0 -mr-4 sm:-mr-8 lg:-mr-[9999px]"
             initial={{ x: 200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <div className="relative h-[500px] sm:h-[600px] lg:h-[700px] w-full flex items-center justify-end lg:justify-start pl-0">
+            <div className="relative h-[500px] sm:h-[600px] lg:h-[700px] w-screen flex items-center justify-end pr-4 sm:pr-8">
               <div className="pointer-events-none relative h-full w-full">
                 <Image
                   src={ASSETS.handPhone}
