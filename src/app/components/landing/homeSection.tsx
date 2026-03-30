@@ -59,11 +59,13 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative h-[calc(100vh-80px)] w-full overflow-hidden bg-[#F3F6FD]"
+      className="relative w-full overflow-hidden bg-[#F3F6FD] pt-8 pb-0 lg:pt-10"
     >
-      <div className="flex h-full w-full flex-col pt-8 lg:pt-10 lg:pl-10">
-        <div className="relative z-10 container mx-auto px-4 sm:px-8 lg:px-16">
-          <div className="w-full lg:w-1/2">
+      <div className="relative min-h-[calc(100vh-80px)] flex flex-col">
+        {/* Content Container */}
+        <div className="flex flex-1 flex-col lg:flex-row items-stretch">
+          {/* Left Content */}
+          <div className="relative z-10 w-full lg:w-1/2 px-4 sm:px-8 lg:px-16 flex flex-col justify-center py-8 lg:py-10">
             <motion.div
               className="text-center lg:text-left"
               variants={heroContainerVariants}
@@ -104,14 +106,14 @@ const HeroSection = () => {
                 variants={heroItemVariants}
               >
                 <motion.button
-                  className="inline-block rounded-sm bg-[linear-gradient(90deg,rgba(2,100,255,1)_0%,rgba(1,76,196,1)_100%)] px-8 py-3 text-sm font-medium text-white shadow-[0px_0px_70px_rgba(0,0,0,0.25)] transition hover:opacity-90 hover:shadow-xl"
+                  className="inline-block rounded-lg bg-[linear-gradient(90deg,rgba(2,100,255,1)_0%,rgba(1,76,196,1)_100%)] px-8 py-3 text-sm font-semibold text-white shadow-[0px_4px_15px_rgba(2,100,255,0.4)] transition hover:opacity-90 hover:shadow-lg"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Selengkapnya
                 </motion.button>
                 <motion.button
-                  className="inline-flex items-center justify-center gap-2 rounded-sm bg-white px-8 py-3 text-sm font-extrabold text-gray-800 shadow-[0px_0px_70px_rgba(0,0,0,0.25)] transition-colors hover:bg-gray-100 hover:shadow-xl"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-3 text-sm font-semibold text-gray-800 shadow-[0px_4px_15px_rgba(0,0,0,0.1)] transition-all hover:bg-gray-50 hover:shadow-lg"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -120,26 +122,88 @@ const HeroSection = () => {
               </motion.div>
             </motion.div>
           </div>
+
+          {/* Right Content - Phone and Avatars */}
+          <motion.div
+            className="relative w-full lg:w-1/2 flex flex-col items-center justify-center py-8 lg:py-0"
+            initial={{ x: 200, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <div className="relative h-[500px] sm:h-[600px] lg:h-[700px] w-full max-w-sm lg:max-w-none flex items-center justify-center">
+              <div className="pointer-events-none relative h-full w-full">
+                <Image
+                  src={ASSETS.handPhone}
+                  alt="Hand holding phone"
+                  fill
+                  className="object-contain object-center"
+                  priority
+                />
+              </div>
+
+              <div className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 h-[280px] sm:h-[330px] lg:h-[420px] w-[120px] sm:w-[140px] lg:w-[180px] overflow-hidden rounded-[28px] sm:rounded-[32px] lg:rounded-[40px] bg-gray-200 shadow-lg">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={currentSlide}
+                    className="absolute inset-0 overflow-hidden rounded-[inherit]"
+                    initial={{ opacity: 0, x: "100%" }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: "-100%" }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                  >
+                    <Image
+                      src={ASSETS.sliderImages[currentSlide]}
+                      alt={`Contoh Desain ${currentSlide + 1}`}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(min-width: 1024px) 180px, (min-width: 640px) 140px, 120px"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              <button
+                onClick={prevSlide}
+                className="pointer-events-auto absolute left-0 sm:left-2 top-1/2 z-30 -translate-y-1/2 rounded-full bg-white/80 p-2 text-gray-800 shadow-md transition-all hover:bg-white"
+                aria-label="Previous Slide"
+              >
+                <ChevronLeft size={20} className="sm:h-6 sm:w-6" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="pointer-events-auto absolute right-0 sm:right-2 top-1/2 z-30 -translate-y-1/2 rounded-full bg-white/80 p-2 text-gray-800 shadow-md transition-all hover:bg-white"
+                aria-label="Next Slide"
+              >
+                <ChevronRight size={20} className="sm:h-6 sm:w-6" />
+              </button>
+            </div>
+          </motion.div>
         </div>
 
+        {/* Wave Background - Bottom Section */}
         <motion.div
-          className="relative flex-1"
-          initial={{ x: 200, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          className="relative w-full mt-auto"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div className="absolute inset-x-0 bottom-0 -z-0">
-            <Image
-              src={ASSETS.bgBlue}
-              alt="Background Biru"
-              fill
-              className="-z-0 !h-[400px] w-auto object-cover object-right lg:!h-auto lg:pl-16"
+          <svg
+            className="w-full h-auto"
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0,40 Q360,0 720,40 T1440,40 L1440,120 L0,120 Z"
+              fill="#0264FF"
+              className="transition-all duration-300"
             />
-          </div>
+          </svg>
 
-          <div className="relative z-10 flex h-4/5 sm:px-8 lg:h-full lg:px-16">
-            <div className="flex items-end gap-3 pb-10 pl-10 sm:gap-4">
-              <div className="flex -space-x-2 sm:-space-x-3">
+          {/* Avatars Section */}
+          <div className="relative bg-[#0264FF] px-4 sm:px-8 lg:px-16 py-6 sm:py-8">
+            <div className="container mx-auto flex items-center justify-start gap-3 sm:gap-4">
+              <div className="flex -space-x-3 sm:-space-x-4">
                 {ASSETS.userAvatars.map((avatar, index) => (
                   <Image
                     key={avatar}
@@ -147,74 +211,18 @@ const HeroSection = () => {
                     alt={`User ${index + 1}`}
                     width={40}
                     height={40}
-                    className="h-8 w-8 rounded-full border-2 border-white shadow-sm sm:h-10 sm:w-10"
+                    className="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-3 border-white shadow-md"
                   />
                 ))}
               </div>
-              <p className="text-xs font-medium text-white sm:text-sm">
+              <p className="text-xs sm:text-sm font-medium text-white">
                 Telah digunakan lebih dari <br />
                 <span className="font-bold">5rb Pengguna</span> 👑
               </p>
             </div>
           </div>
         </motion.div>
-      </div>
-
-      <motion.div
-        className="pointer-events-none absolute inset-y-0 right-0 hidden w-[340px] items-center justify-end lg:flex xl:w-[430px]"
-        initial={{ x: 200, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-      >
-        <div className="relative h-[740px] w-full xl:h-[760px]">
-          <div className="pointer-events-none absolute inset-0 z-20">
-            <Image
-              src={ASSETS.handPhone}
-              alt="Hand holding phone"
-              fill
-              className="object-contain object-right"
-              priority
-            />
-          </div>
-
-          <div className="pointer-events-auto absolute left-[20%] top-[14%] z-10 h-[54%] w-[43.5%] overflow-hidden rounded-[34px] bg-gray-200 shadow-inner">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={currentSlide}
-                className="absolute inset-0 overflow-hidden rounded-[34px]"
-                initial={{ opacity: 0, x: "100%" }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: "-100%" }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-              >
-                <Image
-                  src={ASSETS.sliderImages[currentSlide]}
-                  alt={`Contoh Desain ${currentSlide + 1}`}
-                  fill
-                  className="object-cover object-center"
-                  sizes="(min-width: 1280px) 190px, 170px"
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <button
-            onClick={prevSlide}
-            className="pointer-events-auto absolute left-[4%] top-[51%] z-30 -translate-y-1/2 rounded-full bg-white/70 p-2 text-gray-800 shadow-md transition-colors hover:bg-white"
-            aria-label="Previous Slide"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="pointer-events-auto absolute right-[4%] top-[51%] z-30 -translate-y-1/2 rounded-full bg-white/70 p-2 text-gray-800 shadow-md transition-colors hover:bg-white"
-            aria-label="Next Slide"
-          >
-            <ChevronRight size={24} />
-          </button>
-        </div>
-      </motion.div>
-    </section>
+      </div>    </section>
   );
 };
 

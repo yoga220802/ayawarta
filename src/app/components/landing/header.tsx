@@ -47,23 +47,23 @@ const Header = ({ logoUrl = "/images/logo.png" }: HeaderProps) => {
   }, [sectionIds]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 font-sans shadow-sm backdrop-blur-lg">
-      <div className="container mx-auto px-8 py-4">
+    <header className="sticky top-0 z-50 bg-white/95 font-sans shadow-md backdrop-blur-xl transition-all duration-300">
+      <div className="container mx-auto px-4 sm:px-8 lg:px-16 py-4">
         <div className="flex items-center justify-between">
-          <div className="relative h-10 w-36">
+          <div className="relative h-10 w-32 sm:w-36">
             <Image src={logoUrl} alt="Logo AyaWarta" fill className="object-contain" />
           </div>
 
           <nav className="hidden items-center md:flex">
-            <ul className="flex items-center gap-10 font-semibold text-gray-700">
+            <ul className="flex items-center gap-8 lg:gap-10 font-medium text-gray-600 text-sm lg:text-base">
               {NAV_LINKS.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className={`nav-link-hover whitespace-nowrap ${
+                    className={`transition-colors duration-300 hover:text-blue-600 ${
                       activeSection === link.href.replace("#", "")
-                        ? "active text-blue-600"
-                        : "hover:text-blue-600"
+                        ? "text-blue-600 font-semibold"
+                        : ""
                     }`}
                   >
                     {link.name}
@@ -76,7 +76,7 @@ const Header = ({ logoUrl = "/images/logo.png" }: HeaderProps) => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen((prev) => !prev)}
-              className="text-gray-700 focus:outline-none"
+              className="text-gray-700 hover:text-blue-600 focus:outline-none transition-colors"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -86,17 +86,17 @@ const Header = ({ logoUrl = "/images/logo.png" }: HeaderProps) => {
       </div>
 
       {isMenuOpen && (
-        <div className="bg-white pb-4 md:hidden">
-          <ul className="space-y-3 px-8 text-center">
+        <div className="border-t border-gray-100 bg-white pb-4 md:hidden">
+          <ul className="space-y-2 px-4 sm:px-8 py-2">
             {NAV_LINKS.map((link) => (
               <li key={link.name}>
                 <a
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`block py-2 font-semibold ${
+                  className={`block py-2 px-3 rounded-md font-medium transition-colors ${
                     activeSection === link.href.replace("#", "")
-                      ? "text-blue-600"
-                      : "text-gray-700 hover:text-blue-600"
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                   }`}
                 >
                   {link.name}
