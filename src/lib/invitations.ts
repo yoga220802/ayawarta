@@ -1,20 +1,16 @@
-// src/lib/invitations.ts
-import { InvitationData as InvitationDataType } from '@/lib/dummy-data/wedding/dummy-wedding';
+import { InvitationData as InvitationDataType } from "@/lib/dummy-data/wedding/dummy-wedding";
 import { invitationData as defaultInvitationData } from "@/lib/dummy-data/wedding/dummy-wedding";
 
-// Tipe data untuk metadata undangan
-interface InvitationMeta {
-    theme: 'classic-rose';
-    variant: 'red' | 'green' | 'blue' | 'orange' | 'black' | 'white';
-}
+export type InvitationMeta = {
+  theme: "classic-rose";
+  variant: "red" | "green" | "blue" | "orange" | "black" | "white";
+};
 
-// Tipe data lengkap untuk satu undangan
-interface Invitation {
-    meta: InvitationMeta;
-    data: InvitationDataType;
-}
+export type Invitation = {
+  meta: InvitationMeta;
+  data: InvitationDataType;
+};
 
-// Database simulasi kita, menggunakan slug sebagai kunci
 const sampleInvitations: Record<string, Invitation> = {
     "rika-fauzi": {
         meta: {
@@ -75,7 +71,6 @@ const sampleInvitations: Record<string, Invitation> = {
                     "/images/SAMPLE/FOTO - Couple.jpg",
                 ],
             },
-            // DIKOREKSI: Datanya ditambahkan kembali
             loveStory: [
                 {
                     title: "Cerita Awal Pertemuan",
@@ -96,16 +91,16 @@ const sampleInvitations: Record<string, Invitation> = {
                     platform: "Permata Bank",
                     accountHolder: "Moch Fauzi Febriana",
                     accountNumber: "9999947317",
-                    logo: "/images/landing/payments/Permata.png"
+                    logo: "/images/landing/payments/Permata.png",
                 },
                 {
                     platform: "Dana",
                     accountHolder: "Rika widiarti",
                     accountNumber: "083824827362",
-                    logo: "/images/landing/payments/Dana.png"
-                }
-            ]
-        }
+                    logo: "/images/landing/payments/Dana.png",
+                },
+            ],
+        },
     },
     "shidqi-mita": {
         meta: {
@@ -117,8 +112,8 @@ const sampleInvitations: Record<string, Invitation> = {
                 couple: true,
                 events: true,
                 gallery: true,
-                loveStory: false, // dinonaktifkan
-                gifts: false,     // dinonaktifkan
+                loveStory: false,
+                gifts: false,
                 wishes: true,
             },
             couple: {
@@ -145,7 +140,7 @@ const sampleInvitations: Record<string, Invitation> = {
                     location: "Rumah",
                     address: "Kp.Cisaronggge RT 02/ RW 11 Desa Mekarmukti, Kec Cihampelas Kab.Bandung Barat",
                     mapLink: "https://maps.app.goo.gl/EGwptvewrEttd9R86",
-                }
+                },
             ],
             gallery: {
                 videoUrl: "",
@@ -159,7 +154,7 @@ const sampleInvitations: Record<string, Invitation> = {
                 ],
             },
             musicUrl: "https://youtu.be/JHyhUWcFhWY?si=Qpr144vcUe_Kmopc",
-        }
+        },
     },
     "dudi-aini": {
         meta: {
@@ -206,8 +201,8 @@ const sampleInvitations: Record<string, Invitation> = {
                     platform: "Dana",
                     accountHolder: "Aini Sri Lutami",
                     accountNumber: "1483146063",
-                    logo: "/images/landing/payments/Dana.png"
-                }
+                    logo: "/images/landing/payments/Dana.png",
+                },
             ],
             gallery: {
                 videoUrl: "",
@@ -217,27 +212,21 @@ const sampleInvitations: Record<string, Invitation> = {
                     "https://res.cloudinary.com/doig3gwek/image/upload/v1764585361/foto_4_w4msfb.jpg",
                 ],
             },
-            musicUrl: "https://res.cloudinary.com/doig3gwek/video/upload/v1764532212/lagu_ruirls.mp3"
-        }
-    }
+            musicUrl: "https://res.cloudinary.com/doig3gwek/video/upload/v1764532212/lagu_ruirls.mp3",
+        },
+    },
 };
-/**
- * Fungsi untuk mengambil data undangan berdasarkan slug.
- * Ini mensimulasikan panggilan ke database/backend.
- * @param slug - URL slug dari undangan, cth: "rika-fauzi"
- * @returns Data undangan atau null jika tidak ditemukan.
- */
+
 export function getInvitationBySlug(slug: string): Invitation | null {
-    return sampleInvitations[slug] || null;
+  return sampleInvitations[slug] ?? null;
 }
 
-// Fungsi untuk mendapatkan undangan default
 export function getDefaultInvitation(): Invitation {
-    return {
-        meta: {
-            theme: "classic-rose",
-            variant: "red",
-        },
-        data: defaultInvitationData,
-    };
+  return {
+    meta: {
+      theme: "classic-rose",
+      variant: "red",
+    },
+    data: defaultInvitationData,
+  };
 }
