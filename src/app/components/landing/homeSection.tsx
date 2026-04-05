@@ -11,9 +11,9 @@ const ASSETS = {
   undanganTextImg: "/images/landing/Undangan.png",
   digitalTextImg: "/images/landing/Digital.png",
   sliderImages: [
-    "/images/slider/slide1.png",
-    "/images/slider/slide2.png",
-    "/images/slider/slide3.png",
+    "/images/slider/slide 1.jpg",
+    "/images/slider/slide 2.jpg",
+    "/images/slider/slide 3.jpg",
   ],
   userAvatars: [
     "https://i.pravatar.cc/40?img=1",
@@ -141,7 +141,7 @@ const HeroSection = () => {
                 />
               </div>
 
-              <div className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-27 -translate-y-3/4 z-10 h-[280px] sm:h-[330px] lg:h-[410px] w-[200px] sm:w-[150px] lg:w-[200px] overflow-hidden rounded-[10px] sm:rounded-[10px] lg:rounded-[15px] bg-gray-200 shadow-lg">
+              <div className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-27 -translate-y-3/4 z-10 h-[280px] sm:h-[330px] lg:h-[415px] w-[200px] sm:w-[150px] lg:w-[195px] overflow-hidden rounded-[10px] sm:rounded-[10px] lg:rounded-[15px] bg-gray-200 shadow-lg">
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div
                     key={currentSlide}
