@@ -53,6 +53,13 @@
   --color-primary-rose: #630718;
 }
 
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .bg-primary-rose {
   background-color: var(--color-primary-rose);
 }
