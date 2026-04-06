@@ -61,7 +61,7 @@ const HeroSection = () => {
       id="home"
       className="relative w-full overflow-hidden bg-[#F3F6FD] pt-8 pb-0 lg:pt-10"
     >
-      <div className="relative min-h-[calc(100svh-80px)] flex flex-col">
+      <div className="relative flex flex-col lg:min-h-[calc(100svh-80px)]">
         {/* Content Container */}
         <div className="flex flex-1 flex-col lg:flex-row items-stretch overflow-visible">
           {/* Left Content */}
@@ -73,7 +73,7 @@ const HeroSection = () => {
               animate="visible"
             >
               <motion.h1
-                className="mb-4 flex flex-col items-center justify-center gap-1 lg:flex-row lg:items-end lg:justify-start lg:gap-0"
+                className="mb-4 flex flex-col items-center justify-center gap-0 lg:flex-row lg:items-end lg:justify-start lg:gap-0"
                 variants={heroItemVariants}
               >
                 <div className="order-1 relative h-[126px] aspect-[1.3/1] sm:h-[156px] md:h-[192px] lg:order-1">
@@ -84,7 +84,7 @@ const HeroSection = () => {
                     className="object-contain"
                   />
                 </div>
-                <div className="order-2 relative h-[156px] aspect-[1/1] sm:h-[192px] md:h-[240px] lg:order-2 lg:-mb-1">
+                <div className="order-2 relative -mt-20 h-[156px] aspect-[1/1] sm:-mt-24 sm:h-[192px] md:mt-0 md:h-[240px] lg:order-2 lg:-mb-1">
                   <Image
                     src={ASSETS.digitalTextImg}
                     alt="Digital"
@@ -182,7 +182,7 @@ const HeroSection = () => {
 
         {/* Wave Background - Bottom Section */}
         <motion.div
-          className="relative w-full mt-auto"
+          className="relative w-full mt-6 lg:mt-auto"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
