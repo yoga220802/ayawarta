@@ -76,7 +76,7 @@ const HeroSection = () => {
                 className="mb-4 flex flex-col items-center justify-center gap-1 lg:flex-row lg:items-end lg:justify-start lg:gap-0"
                 variants={heroItemVariants}
               >
-                <div className="order-1 relative h-[126px] aspect-[1.5/1] sm:h-[156px] md:h-[192px] lg:order-1">
+                <div className="order-1 relative h-[126px] aspect-[1.3/1] sm:h-[156px] md:h-[192px] lg:order-1">
                   <Image
                     src={ASSETS.undanganTextImg}
                     alt="Undangan"
@@ -84,7 +84,7 @@ const HeroSection = () => {
                     className="object-contain"
                   />
                 </div>
-                <div className="order-2 relative h-[156px] aspect-[1.2/1] sm:h-[192px] md:h-[240px] lg:order-2 lg:-mb-1">
+                <div className="order-2 relative h-[156px] aspect-[1/1] sm:h-[192px] md:h-[240px] lg:order-2 lg:-mb-1">
                   <Image
                     src={ASSETS.digitalTextImg}
                     alt="Digital"
@@ -141,7 +141,7 @@ const HeroSection = () => {
                 />
               </div>
 
-              <div className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-27 -translate-y-3/4 z-10 h-[280px] sm:h-[330px] lg:h-[415px] w-[200px] sm:w-[150px] lg:w-[195px] overflow-hidden rounded-[10px] sm:rounded-[10px] lg:rounded-[15px] bg-gray-200 shadow-lg">
+              <div className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-42.5 -translate-y-3/4 z-10 h-[280px] sm:h-[330px] lg:h-[420px] w-[200px] sm:w-[150px] lg:w-[195px] overflow-hidden rounded-[10px] sm:rounded-[10px] lg:rounded-[15px] bg-gray-200 shadow-lg">
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div
                     key={currentSlide}
