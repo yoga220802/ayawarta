@@ -11,9 +11,9 @@ const ASSETS = {
   undanganTextImg: "/images/landing/Undangan.png",
   digitalTextImg: "/images/landing/Digital.png",
   sliderImages: [
-    "/images/slider/slide1.png",
-    "/images/slider/slide2.png",
-    "/images/slider/slide3.png",
+    "/images/slider/slide 1.jpg",
+    "/images/slider/slide 2.jpg",
+    "/images/slider/slide 3.jpg",
   ],
   userAvatars: [
     "https://i.pravatar.cc/40?img=1",
@@ -59,13 +59,13 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative w-screen left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] overflow-hidden bg-[#F3F6FD] pt-8 pb-0 lg:pt-10"
+      className="relative w-full overflow-hidden bg-[#F3F6FD] pt-8 pb-0 lg:pt-10"
     >
-      <div className="relative min-h-[calc(100vh-80px)] flex flex-col">
+      <div className="relative min-h-[calc(100svh-80px)] flex flex-col">
         {/* Content Container */}
         <div className="flex flex-1 flex-col lg:flex-row items-stretch overflow-visible">
           {/* Left Content */}
-          <div className="relative z-10 w-full lg:w-1/2 px-4 sm:px-8 lg:px-16 flex flex-col justify-center py-8 lg:py-10">
+          <div className="relative z-10 w-full lg:w-[58%] px-4 sm:px-8 lg:pl-24 lg:pr-12 flex flex-col justify-center py-8 lg:py-10">
             <motion.div
               className="text-center lg:text-left"
               variants={heroContainerVariants}
@@ -73,10 +73,10 @@ const HeroSection = () => {
               animate="visible"
             >
               <motion.h1
-                className="mb-4 flex items-end justify-center lg:justify-start"
+                className="mb-4 flex flex-col items-center justify-center gap-1 lg:flex-row lg:items-end lg:justify-start lg:gap-0"
                 variants={heroItemVariants}
               >
-                <div className="relative h-[35px] aspect-[2.5/1] sm:h-[45px] md:h-[55px]">
+                <div className="order-1 relative h-[126px] aspect-[1.5/1] sm:h-[156px] md:h-[192px] lg:order-1">
                   <Image
                     src={ASSETS.undanganTextImg}
                     alt="Undangan"
@@ -84,7 +84,7 @@ const HeroSection = () => {
                     className="object-contain"
                   />
                 </div>
-                <div className="relative -mb-1 h-[45px] aspect-[2.5/1] sm:h-[55px] md:h-[70px]">
+                <div className="order-2 relative h-[156px] aspect-[1.2/1] sm:h-[192px] md:h-[240px] lg:order-2 lg:-mb-1">
                   <Image
                     src={ASSETS.digitalTextImg}
                     alt="Digital"
@@ -125,23 +125,23 @@ const HeroSection = () => {
 
           {/* Right Content - Phone and Avatars */}
           <motion.div
-            className="hidden lg:flex relative w-screen lg:w-auto flex-col items-stretch justify-center py-8 lg:py-0 -mr-4 sm:-mr-8 lg:-mr-[9999px]"
+            className="hidden lg:flex relative w-screen lg:w-[42%] flex-col items-stretch justify-center py-8 lg:py-0 -mr-4 sm:-mr-8 lg:-mr-[320px]"
             initial={{ x: 200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-            <div className="relative h-[500px] sm:h-[600px] lg:h-[700px] w-screen flex items-center justify-end pr-4 sm:pr-8">
+            <div className="relative h-[500px] sm:h-[600px] lg:h-[650px] w-full flex items-center justify-end pr-0 sm:pr-2">
               <div className="pointer-events-none relative h-full w-full">
                 <Image
                   src={ASSETS.handPhone}
                   alt="Hand holding phone"
                   fill
-                  className="object-contain object-center"
+                  className="object-contain object-right"
                   priority
                 />
               </div>
 
-              <div className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 h-[280px] sm:h-[330px] lg:h-[420px] w-[120px] sm:w-[140px] lg:w-[180px] overflow-hidden rounded-[28px] sm:rounded-[32px] lg:rounded-[40px] bg-gray-200 shadow-lg">
+              <div className="pointer-events-auto absolute left-1/2 top-1/2 -translate-x-27 -translate-y-3/4 z-10 h-[280px] sm:h-[330px] lg:h-[415px] w-[200px] sm:w-[150px] lg:w-[195px] overflow-hidden rounded-[10px] sm:rounded-[10px] lg:rounded-[15px] bg-gray-200 shadow-lg">
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div
                     key={currentSlide}
@@ -164,14 +164,14 @@ const HeroSection = () => {
 
               <button
                 onClick={prevSlide}
-                className="pointer-events-auto absolute left-0 sm:left-2 top-1/2 z-30 -translate-y-1/2 rounded-full bg-white/80 p-2 text-gray-800 shadow-md transition-all hover:bg-white"
+                className="pointer-events-auto absolute -left-6 sm:-left-4 top-1/2 z-30 -translate-y-1/2 rounded-full bg-white/80 p-2 text-gray-800 shadow-md transition-all hover:bg-white"
                 aria-label="Previous Slide"
               >
                 <ChevronLeft size={20} className="sm:h-6 sm:w-6" />
               </button>
               <button
                 onClick={nextSlide}
-                className="pointer-events-auto absolute right-0 sm:right-2 top-1/2 z-30 -translate-y-1/2 rounded-full bg-white/80 p-2 text-gray-800 shadow-md transition-all hover:bg-white"
+                className="pointer-events-auto absolute right-10 sm:right-12 top-1/2 z-30 -translate-y-1/2 rounded-full bg-white/80 p-2 text-gray-800 shadow-md transition-all hover:bg-white"
                 aria-label="Next Slide"
               >
                 <ChevronRight size={20} className="sm:h-6 sm:w-6" />
